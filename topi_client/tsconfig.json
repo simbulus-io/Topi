@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ES2019",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "resolveJsonModule": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
