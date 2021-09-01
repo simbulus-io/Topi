@@ -6,10 +6,10 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class AboutMines extends Vue {
 
-  public message: string = 'This is an example of a reactive data binding';
+  public message: string = 'A different message';
 
   public async created() {
-    setTimeout( () => this.message = 'And it changes', 1000);
+    setTimeout( () => this.message = 'And it changes', 5000);
   }
 
 }

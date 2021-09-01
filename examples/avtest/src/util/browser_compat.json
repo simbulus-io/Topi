@@ -1,0 +1,29 @@
+{
+  "incompatable":[
+    { "platform":"iOS",
+      "//-- you can't comment JSON files - this is the standard hack": 0,
+      "//-- use rational versioning string to describe platform ranges": 0,
+      "platform_version":"<10.3", 
+      "browser": "Chrome",
+      "browser_version": "<60",
+      "//-- user facing message":0,
+      "message": "Chrome on iOS does not support WebRTC - please use Safari on this platform"
+    },
+    {
+      "platform":"iOS",
+      "//-- you can't comment JSON files - this is the standard hack": 0,
+      "//-- use rational versioning string to describe platform ranges": 0,
+      "platform_version":">10.3", 
+      "browser": "Safari",
+      "browser_version": "<10",
+      "//-- user facing message":0,
+      "message": "Looks like you are using Safari on iOS. Looking good!" 
+    },
+    { "platform":"*",
+      "platform_version":"*", 
+      "browser": "IE",
+      "browser_version": "*",
+      "message": "All versions of Internet Explorer are NOT supported. Please use Chrome for best preformance."
+    }
+  ]
+}

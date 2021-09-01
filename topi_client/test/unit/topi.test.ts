@@ -13,4 +13,9 @@ describe('Test Topi', () => {
     expect(true).toBeTruthy();
   });
 
+  test('this_will_fail', () => {
+    // trivial expectation
+    expect(false).toBeTruthy();
+  });
+
 });

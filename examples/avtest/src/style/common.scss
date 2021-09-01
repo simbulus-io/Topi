@@ -1,0 +1,15 @@
+$woot_tutor_purple: #544972;
+$woot_tutor_blue: #356b9a;
+$woot_tutor_brightblue: #519fe4;
+$woot_tutor_green: #94c34d;
+$woot_tutor_orange: #f47321;
+$woot_tutor_darkgray: #444444;
+$woot_tutor_red: #b33a3a; 
+
+$primary: $woot_tutor_purple;
+$body-color: $woot_tutor_darkgray;  //this is the text 
+$font-family-sans-serif: 'Work Sans', sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
