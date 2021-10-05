@@ -7,5 +7,6 @@
   </div>
 </template>
 
+
 <script lang='ts' src='./about_mines.ts'></script>
 
