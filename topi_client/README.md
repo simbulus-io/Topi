@@ -78,3 +78,14 @@ yarn install
 ```
 yarn run serve
 ```
+
+### If there is a 'vue-cli-service' error
+```
+npm install @vue/cli-service -g
+```
+or try - https://stackoverflow.com/questions/51172064/command-not-found-with-vue-cli
+
+### If there is a command failed with exit code 1
+```
+yarn add yarn
+```
