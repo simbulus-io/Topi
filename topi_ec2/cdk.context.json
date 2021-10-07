@@ -1,0 +1,8 @@
+{
+  "vpc-provider:account=525256556709:filter.vpc-id=vpc-01cb12e35d9d59f47:region=us-east-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-01cb12e35d9d59f47",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": []
+  }
+}
