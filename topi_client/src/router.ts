@@ -12,6 +12,21 @@ const routes: Array<RouteConfig> = [
     component: Home,
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('./components/views/auth/login.vue'),
+  },
+  {
+    path: '/forgot',
+    name: 'Forgot',
+    component: () => import ('./components/views/auth/forgot.vue'),
+  },
+  {
+    path: '/calendar',
+    name: 'Calendar',
+    component: () => import('./components/views/calendar.vue')
+  },
+  {
     path: '/about',
     name: 'AboutMines',
     component: () => import('./components/AboutMines.vue'),
