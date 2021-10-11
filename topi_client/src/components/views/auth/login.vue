@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="title">
-        <img style="width:100px; height:100px;" src="../../images/logo.png"> 
+        <!-- <img style="width:100px; height:100px;" src="../../images/logo.png">  -->
         <h1> Topi Login Page </h1>
         <p><i>Welcome back!</i></p>
     </div>
@@ -38,6 +38,7 @@
 
 
 <script lang="ts">
+export default {}
 </script>
 
 
