@@ -26,10 +26,10 @@
 
         <div id="options">
                 <ul id="ul-links">            
-                    <li><a href="#">About Saga Education</a></li>
-                    <li><a href="#about">About Mines Field Session Group Topi</a></li>
-                    <li><span class="password"><a href="#forgot">Forgot Password?</a></span></li>
-                    <li><a href=#home>Back to home page?</a></li>
+                    <li><router-link to="/about">About Saga Education</router-link></li>
+                    <li><router-link to="/about">About Mines Field Session Group Topi</router-link></li>
+                    <li><span class="password"><router-link to='/forgot'>Forgot Password?</router-link></span></li>
+                    <li><router-link to="/">Back Home?</router-link></li>
                 </ul>
         </div>  
     </div>
