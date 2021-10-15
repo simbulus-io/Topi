@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import Routes from './routes/user-routes';
 import ErrorHandler from './errorHandler';
 
-
 /** Create express server and define namespace */
 
 const app = express();
@@ -66,16 +65,20 @@ app.use((req, res, next) => {
  * throw away routes to html pages -> Testing
  */
 
-app.use('/user', Routes);
+app.use('/users', Routes);
 
 /** API uses errorHandler.ts */
 
 app.use(ErrorHandler.errorHandler);
-
+export default app;
 /** 
  * Create Server using http import 
  * import hostname & port from the config file
  */
 
-const httpServer = http.createServer(app);
-httpServer.listen(config.server.port, () => log.info(namespace, `Running => ${config.server.hostname}:${config.server.port}`));
+//app.listen(config.server.port)
+//const httpServer = http.createServer(app);
+// app.listen(config.server.port, () => {
+//     log.info(namespace, `Running => ${config.server.hostname}:${config.server.port}`)
+//     console.log("running")
+// });

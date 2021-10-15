@@ -7,7 +7,7 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="#" method="post">
+        <form id="login-form" action="user/login" method="post">
 
             <div class="container">
                 <label style="font-size:20px" for="username"><b>Username</b></label>
@@ -38,7 +38,9 @@
 
 
 <script lang="ts">
-export default {}
+export default {
+
+}
 </script>
 
 
