@@ -20,10 +20,10 @@ const getEvents = async (req: Request, res: Response, next: NextFunction) => {
 const createEvent = (req: Request, res: Response, next: NextFunction) => {
     log.info(namespace, 'CREATING-EVENTS');
 
-    let { date, info } = req.body
+    let { date, extraInfo } = req.body
     const event = new ScheduleSchmea({
         date,
-        info
+        extraInfo
     });
     return event.save()
     .then(result => {
@@ -33,8 +33,20 @@ const createEvent = (req: Request, res: Response, next: NextFunction) => {
         return res.status(500).json({msg: error.message, error})
     })
 }
+const deleteEvent = (req: Request, res: Response) => {
+    ScheduleSchmea.deleteOne({ _id: req.params.id })
+        .exec()
+        .then((events) => {
+            return res.status(200).json({ msg: events });
+                
+        })
+        .catch((error) => {
+            return res.status(500).json({ message: error.message, error });
+        });        
+};
 
 export default {
     getEvents,
-    createEvent
+    createEvent,
+    deleteEvent
 };

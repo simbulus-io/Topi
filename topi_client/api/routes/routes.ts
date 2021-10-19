@@ -22,6 +22,8 @@ router.delete('/delete-user/:id', userController.deleteUser);
 router.put('/update-user/:id', userController.updateUser);
 router.get('/get-events', scheduleController.getEvents);
 router.post('/create-event', scheduleController.createEvent)
+router.delete('/delete-event/:id', scheduleController.deleteEvent);
+
 
 
 export = router;
