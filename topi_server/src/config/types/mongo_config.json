@@ -1,0 +1,116 @@
+{
+  "$ref": "#/definitions/MongoConfig",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "MongoConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "mongo",
+          "type": "string"
+        },
+        "topi_db": {
+          "additionalProperties": false,
+          "properties": {
+            "dbname": {
+              "type": "string"
+            },
+            "instance": {
+              "$ref": "#/definitions/MongoInstance"
+            }
+          },
+          "required": [
+            "instance",
+            "dbname"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "topi_db"
+      ],
+      "type": "object"
+    },
+    "MongoInstance": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/MongoInstanceURI"
+        },
+        {
+          "$ref": "#/definitions/MongoInstanceHostPort"
+        },
+        {
+          "$ref": "#/definitions/MongoInstanceDocker"
+        }
+      ]
+    },
+    "MongoInstanceDocker": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "type": {
+          "const": "docker",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "MongoInstanceHostPort": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "port": {
+          "type": "number"
+        },
+        "type": {
+          "const": "host_port",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "host",
+        "port"
+      ],
+      "type": "object"
+    },
+    "MongoInstanceURI": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "uri",
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "uri"
+      ],
+      "type": "object"
+    }
+  }
+}

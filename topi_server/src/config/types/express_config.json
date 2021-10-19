@@ -1,0 +1,30 @@
+{
+  "$ref": "#/definitions/ExpressConfig",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ExpressConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "express_port": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "name": {
+          "const": "express",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "express_port"
+      ],
+      "type": "object"
+    }
+  }
+}

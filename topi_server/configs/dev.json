@@ -1,0 +1,13 @@
+{
+  "dms": {
+    "jobs": {
+      "dms/dms_job": { "concurrency" : 10 }
+    }
+  },
+  "agenda" : {
+    "purge_on_start": true
+  },
+  "express": {
+    "express_port": 5102
+  }
+}

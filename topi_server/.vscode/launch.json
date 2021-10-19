@@ -1,0 +1,41 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug topi (docker)",
+      "program": "${workspaceFolder}/dist/topi_main",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "smartStep": true,
+      "skipFiles": ["<node_internals>/**"],
+      "args": [
+        "--express:express_port=5104",
+      ],
+      "env" : {
+        "NODE_ENV": "docker"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug topi (development)",
+      "program": "${workspaceFolder}/dist/topi_main",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "smartStep": true,
+      "skipFiles": ["<node_internals>/**"],
+      "args": [
+        "--express:express_port=5104",
+      ],
+    },
+  ]
+}
