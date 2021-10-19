@@ -5,7 +5,9 @@ import mongoose from 'mongoose';
 
 const namespace = 'USER-CONTROLLER';
 
-const login = (req: Request, res: Response, next: NextFunction) => {
+const login =  (req: Request, res: Response, next: NextFunction) => {
+    log.info(namespace, 'REQUESTING-LOGIN');
+
     let { email, password } = req.body;
 
     UserSchema.find({ email })
@@ -26,13 +28,13 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-const getInfo = (req: Request, res: Response, next: NextFunction) => {
+const getInfo = async (req: Request, res: Response, next: NextFunction) => {
     log.info(namespace, 'REQUESTING-INFO');
     
     UserSchema.find()
         .exec()
         .then((users) => {
-            return res.status(200).json({ users: users, count: users.length });
+            return res.json({ users: users });
                 
         })
         .catch((error) => {

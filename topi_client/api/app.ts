@@ -5,6 +5,7 @@ import config from './config/config';
 import mongoose from 'mongoose';
 import Routes from './routes/user-routes';
 import ErrorHandler from './errorHandler';
+import info from './controllers/user-controller';
 
 /** Create express server and define namespace */
 
@@ -31,7 +32,7 @@ mongoose.connect(config.mongo.url, config.mongo.options).then(result => {
 */
 
 app.use((req, res, next) => {
-    log.info(namespace, `[METHOD - ${req.method}], [URL] [${req.url}]`);
+    log.info(namespace, `[METHOD - ${req.method}], [URL] [${req.url}], Status-${res.statusCode}`);
     res.on('finish', () => {
         log.info(namespace, `[STATUS - ${res.statusCode}]`);
     });
@@ -51,7 +52,7 @@ app.use(express.json());
  */
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'x');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin X-Requested-With, Content-Type, Accept, Authorization');
     if (req.method == 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -66,6 +67,10 @@ app.use((req, res, next) => {
  */
 
 app.use('/users', Routes);
+app.get('/', (req, res) => {
+    res.send('Hello')
+})
+
 
 /** API uses errorHandler.ts */
 
@@ -77,8 +82,8 @@ export default app;
  */
 
 //app.listen(config.server.port)
-//const httpServer = http.createServer(app);
-// app.listen(config.server.port, () => {
-//     log.info(namespace, `Running => ${config.server.hostname}:${config.server.port}`)
-//     console.log("running")
-// });
+const httpServer = http.createServer(app);
+app.listen(config.server.port, () => {
+    log.info(namespace, `Running => ${config.server.hostname}:${config.server.port}`)
+    console.log("running")
+});

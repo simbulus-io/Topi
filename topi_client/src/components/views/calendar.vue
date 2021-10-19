@@ -52,20 +52,11 @@
             </div>
 
             <div class="cal">
-                <div class="cal-body">
-                    <h1> Study Times </h1>
-                    <div class="info">
-                        <p class="event"> 
-                            <b style="color:#2c3e50">9:00AM-10:00AM </b>
-                        </p>
-                        <p class="event"> 
-                            <b style="color:#2c3e50">2:00PM-4:00PM</b>
-                        </p>
-                        <p class="event"> 
-                            <b style="color:#2c3e50">7:00PM-7:30PM</b>
-                        </p>
-                    </div>
-                </div>
+                <ul class="events">
+                    <li class="media" v-for="event in events" v-bind:key="event.firstName">
+                        <p class="event">{{event.firstName}}</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -73,7 +64,22 @@
 </template>
 
 <script>
-export default {}
+const URL = 'http://localhost:5000/users/get-info'
+
+export default {
+    name: 'calendar',
+
+    data: () => ({
+        events: []
+    }),
+    mounted() {
+        fetch(URL)
+            .then(res => res.json())
+            .then(result => { this.events = result.users })
+    },
+    
+
+};
 </script>
 
 <style scoped>

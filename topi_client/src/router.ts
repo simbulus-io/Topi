@@ -36,6 +36,11 @@ const routes: Array<RouteConfig> = [
     name: 'Another',
     component: () => import('./components/Another.vue'),
   },
+  {
+    path: '/register',
+    name: 'Registration',
+    component: () => import ('./components/views/auth/register.vue')
+  }
 ];
 
 const router = new VueRouter({

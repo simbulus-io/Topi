@@ -2,25 +2,32 @@
 <div>
     <div class="title">
         <!-- <img style="width:100px; height:100px;" src="../../images/logo.png">  -->
-        <h1> Topi Login Page </h1>
-        <p><i>Welcome back!</i></p>
+        <h1> Topi Registration Page </h1>
+        <p><i>Welcome to Topi!</i></p>
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5000/users/login" method="post">
+        <form id="login-form" action="http://localhost:5000/users/create-user" method="post">
 
             <div class="container">
+                <label style="font-size:20px" for="firstName"><b>First Name</b></label>
+                <input type="text" placeholder="Enter Your first name" name="firstName" required>
+
+                <label style="font-size:20px" for="lastName"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter Your last name" name="lastName" required>
+
                 <label style="font-size:20px" for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Your Email" name="email" required>
+
                 <label style="font-size:20px" for="password"><b>Password</b></label>
                 <input type="password" placeholder="Enter Your Password" name="password" required>
 
-                    <div class="remember">
-                            <button type="submit" id="login">Login</button>
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
-                        </label>
-                    </div>
+                <div class="remember">
+                        <button type="submit" id="login">Sign Up</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
+                    </label>
+                </div>
             </div>
         </form>
 
@@ -39,7 +46,7 @@
 
 <script lang="ts">
 
-const URL = 'http://localhost:5000/users/login'
+// const URL = 'http://localhost:5000/users/login'
 
 export default {
     

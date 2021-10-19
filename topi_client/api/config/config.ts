@@ -51,7 +51,7 @@ const MONGO = {
  * Initialize port number and host name for testing purposes
  */
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 const HOST = process.env.HOST || 'localhost';
 
