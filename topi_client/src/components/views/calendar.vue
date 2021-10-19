@@ -54,7 +54,8 @@
             <div class="cal">
                 <ul class="events">
                     <li class="media" v-for="event in events" v-bind:key="event.firstName">
-                        <p class="event">{{event.firstName}}</p>
+                        <p class="event">{{event.date}}</p>
+                        <p class="event">{{event.extraInfo}}</p>
                     </li>
                 </ul>
             </div>
@@ -64,7 +65,7 @@
 </template>
 
 <script>
-const URL = 'http://localhost:5000/users/get-info'
+const URL = 'http://localhost:5000/users/get-events'
 
 export default {
     name: 'calendar',
@@ -75,7 +76,7 @@ export default {
     mounted() {
         fetch(URL)
             .then(res => res.json())
-            .then(result => { this.events = result.users })
+            .then(result => { this.events = result.events })
     },
     
 
