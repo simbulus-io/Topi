@@ -5,6 +5,13 @@ import mongoose from 'mongoose';
 
 const namespace = 'USER-CONTROLLER';
 
+/**
+ * Login func. matches given email, and matches that email's corresponding
+ * password to the inputted value. 
+ * Right now it just returns the user's name when there is a match - Needs
+ * to be updated
+ */
+
 const login =  (req: Request, res: Response, next: NextFunction) => {
     log.info(namespace, 'REQUESTING-LOGIN');
 
@@ -27,6 +34,10 @@ const login =  (req: Request, res: Response, next: NextFunction) => {
     });
 }
 
+
+/**
+ * Returns all user's and their info.
+ */
 
 const getInfo = async (req: Request, res: Response, next: NextFunction) => {
     log.info(namespace, 'REQUESTING-INFO');
@@ -69,6 +80,10 @@ const createUser =  async (req: Request, res: Response, next: NextFunction) => {
     
     
 };
+
+/**
+ * deleteUser & updateUser were just made when testing with postman
+ */
 
 const deleteUser = (req: Request, res: Response) => {
     UserSchema.deleteOne({ _id: req.params.id })

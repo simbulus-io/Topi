@@ -16,14 +16,15 @@ const router = express.Router();
  */
 
 router.get('/get-info', userController.getInfo);
-router.post('/create-user', userController.createUser);
-router.post('/login', userController.login);
-router.delete('/delete-user/:id', userController.deleteUser);
-router.put('/update-user/:id', userController.updateUser);
 router.get('/get-events', scheduleController.getEvents);
+
+router.post('/login', userController.login);
+router.post('/create-user', userController.createUser);
 router.post('/create-event', scheduleController.createEvent)
+
+router.delete('/delete-user/:id', userController.deleteUser);
 router.delete('/delete-event/:id', scheduleController.deleteEvent);
 
-
+router.put('/update-user/:id', userController.updateUser);
 
 export = router;

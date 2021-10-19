@@ -76,12 +76,12 @@ app.get('/', (req, res) => {
 
 app.use(ErrorHandler.errorHandler);
 export default app;
+
 /** 
  * Create Server using http import 
  * import hostname & port from the config file
  */
 
-//app.listen(config.server.port)
 const httpServer = http.createServer(app);
 app.listen(config.server.port, () => {
     log.info(namespace, `Running => ${config.server.hostname}:${config.server.port}`)
