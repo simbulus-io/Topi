@@ -24,7 +24,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/calendar',
     name: 'Calendar',
-    component: () => import('./components/views/calendar.vue')
+    component: () => import('./components/views/calendar.vue'),
   },
   {
     path: '/about',
@@ -39,13 +39,13 @@ const routes: Array<RouteConfig> = [
   {
     path: '/register',
     name: 'Registration',
-    component: () => import ('./components/views/auth/register.vue')
-  }
+    component: () => import ('./components/views/auth/register.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode:'history',
-  routes
+  routes,
 });
 
 export default router;

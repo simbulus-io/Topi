@@ -24,9 +24,7 @@
 
                 <div class="remember">
                         <button type="submit" id="login">Sign Up</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
-                    </label>
+    
                 </div>
             </div>
         </form>

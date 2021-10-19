@@ -7,7 +7,7 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5000/users/login" method="post">
+        <form id="login-form" onSubmit={submitForm} action="http://localhost:5000/users/login" method="post">
 
             <div class="container">
                 <label style="font-size:20px" for="email"><b>Email</b></label>
@@ -39,19 +39,20 @@
 
 <script lang="ts">
 
+import defineComponent from 'vue';
+
 const URL = 'http://localhost:5000/users/login'
 
 export default {
+
+    
+}
     
 
     // mounted() {
-    //     fetch(URL)
-    //     .then(res => res.json()
-    //     .then(result => {
-    //         console.log('RESULT' + result)
-    //     }));
+        
     // }
-}
+
 </script>
 
 

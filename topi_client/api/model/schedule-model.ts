@@ -9,14 +9,8 @@ import log from '../config/log'
 
 const ScheduleSchema: Schema = new Schema (
     {
-        day: {
-            type: Number
-        },
-        month: {
-            type: String
-        },
-        time: {
-            type: Number
+        date: {
+            type: Date
         },
         extraInfo: {
             type: String

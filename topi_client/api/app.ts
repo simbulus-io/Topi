@@ -3,7 +3,7 @@ import express from 'express';
 import log from './config/log';
 import config from './config/config';
 import mongoose from 'mongoose';
-import Routes from './routes/user-routes';
+import Routes from './routes/routes';
 import ErrorHandler from './errorHandler';
 import info from './controllers/user-controller';
 
