@@ -24,7 +24,7 @@ banner 'Building topi_server'
 banner 'Generating config JSON schema'
 
 # generate json schema for config
-./ts2json.rb generate --srcs "./src/config/types/*.ts" --outdir ./src/config/types
+#./ts2json.rb generate --srcs "./src/config/types/*.ts" --outdir ./src/config/types
 
 yarn install
 

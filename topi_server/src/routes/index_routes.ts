@@ -1,8 +1,8 @@
 import * as path from 'path';
+import { MongoDBs } from '../helpers/mongo_helper';
 import { Request, Response, Router } from 'express';
 import { RoutesBase } from './routes_base';
-
-
+import { serialize } from 'v8';
 
 const ver = (function() {
   try { return require('../../package.json')['version'] } catch (e) { return 'unknown' }
@@ -24,7 +24,7 @@ export class IndexRoutes extends RoutesBase {
 
     router.get(`${RoutesBase.API_BASE_URL}/alive`, (req: any, res: Response) => {
       const rval = {
-        status: 'topi',
+        status: true,
         version : `version ${ ver } - alive HTTP get`,
       };
       res.json(rval);
@@ -37,6 +37,18 @@ export class IndexRoutes extends RoutesBase {
         body: req.body,
       };
       res.json(rval);
+    });
+
+    // Example of how to interact with mongo here (Sean)
+    router.get(`${RoutesBase.API_BASE_URL}/test_mongo_access`, async (req: any, res: Response) => {
+      const mongo: MongoDBs = req.app.get('mongo');
+      const db = mongo.topi_db;
+      let collections = await db.listCollections().toArray()
+      if (collections.length === 0) {
+        await db.createCollection('look_a_test_collection');
+        collections = await db.listCollections().toArray()
+      }
+      res.json({ message: 'mongo is alive', collections })
     });
 
   }
