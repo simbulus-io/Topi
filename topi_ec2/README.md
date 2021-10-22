@@ -12,6 +12,11 @@ directory.  To create the virtualenv it assumes that there is a `python3`
 package. If for any reason the automatic creation of the virtualenv fails,
 you can create the virtualenv manually.
 
+On Ubuntu system you'll need an apt package
+```
+sudo apt install python3.8-venv
+```
+
 To manually create a virtualenv on MacOS and Linux:
 
 ```
@@ -35,6 +40,11 @@ Once the virtualenv is activated, you can install the required dependencies.
 
 ```
 $ pip install -r requirements.txt
+```
+
+install CDK
+```
+npm install -g aws-cdk
 ```
 
 At this point you can now synthesize the CloudFormation template for this code.
