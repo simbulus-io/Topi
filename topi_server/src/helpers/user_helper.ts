@@ -69,7 +69,7 @@ const deleteUser = (req: Request, res: Response) => {
     const db = mongo.topi_db;
 
     db.collection('users')
-    .deleteOne({ _id: req.params.id })
+    .deleteOne({ _id: req.body.id })
     .then(user => {
         return res.status(200).json({ user })
     })
