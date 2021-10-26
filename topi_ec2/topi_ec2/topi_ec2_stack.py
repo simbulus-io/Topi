@@ -11,8 +11,7 @@ from aws_cdk import(
 vpcID = "vpc-01cb12e35d9d59f47"
 instanceName = "Topi_Server"
 instanceType = "t2.micro"
-amiName = "ami-00399ec92321828f5"
-
+amiName = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20211021-aced0818-eef1-427a-9e04-8ba38bada306"
 
 class TopiEc2Stack(cdk.Stack):
 
@@ -22,7 +21,8 @@ class TopiEc2Stack(cdk.Stack):
         vpc = ec2.Vpc.from_lookup(
             self,
             "vpc",
-            vpc_id=vpcID
+            vpc_id=vpcID,
+            subnet_group_name_tag="Public Subnet"
         )
 
         sec_group = ec2.SecurityGroup(
