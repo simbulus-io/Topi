@@ -3,6 +3,8 @@ import { MongoDBs } from '../helpers/mongo_helper';
 import { Request, Response, Router } from 'express';
 import { RoutesBase } from './routes_base';
 import { serialize } from 'v8';
+import userHelper from '../helpers/user_helper';
+
 
 const ver = (function() {
   try { return require('../../package.json')['version'] } catch (e) { return 'unknown' }
@@ -13,11 +15,16 @@ export class IndexRoutes extends RoutesBase {
   constructor(router: Router) {
     super(router);
 
-
     router.get('/', (req: Request, res: Response) => {
       res.sendFile('topi.html', { root: path.join(__dirname, '../../', 'public') });
     });
 
+    // register new user, login existing user
+    router.post(`${RoutesBase.API_BASE_URL}/register`, userHelper.register)
+    router.get(`${RoutesBase.API_BASE_URL}/login`, userHelper.login)
+    router.get(`${RoutesBase.API_BASE_URL}/get-info`, userHelper.getInfo)
+
+    
     router.get(`${RoutesBase.API_BASE_URL}/home`, (req: Request, res: Response) => {
       res.sendFile('topi.html', { root: path.join(__dirname, '../../', 'public') });
     });

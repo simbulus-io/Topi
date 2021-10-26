@@ -6,6 +6,6 @@ express:
 mongo:
   name: 'mongo'
   topi_db:
-    instance: { type: 'host_port', host: 10.0.1.3, port: 27017 }
+    instance: { type: 'host_port', host: 127.0.0.1, port: 27017 }
     dbname: topi
 
