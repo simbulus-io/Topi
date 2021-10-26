@@ -4,5 +4,31 @@
     "vpcCidrBlock": "10.0.0.0/16",
     "availabilityZones": [],
     "subnetGroups": []
-  }
+  },
+  "vpc-provider:account=525256556709:filter.vpc-id=vpc-01cb12e35d9d59f47:region=us-east-2:returnAsymmetricSubnets=true:subnetGroupNameTag=Public Subnet": {
+    "vpcId": "vpc-01cb12e35d9d59f47",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0381d686fe2eff83f",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "us-east-2a",
+            "routeTableId": "rtb-08fa6155bbd0e8c1d"
+          },
+          {
+            "subnetId": "subnet-007da04c4c7dcf833",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "us-east-2a",
+            "routeTableId": "rtb-0b768c47bb7ad3d63"
+          }
+        ]
+      }
+    ]
+  },
+  "ami:account=525256556709:filters.image-type.0=machine:filters.name.0=ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20211021-aced0818-eef1-427a-9e04-8ba38bada306:filters.state.0=available:region=us-east-2": "ami-021012742ef3a32f2"
 }

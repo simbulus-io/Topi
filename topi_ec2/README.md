@@ -39,7 +39,16 @@ If you are a Windows platform, you would activate the virtualenv like this:
 Once the virtualenv is activated, you can install the required dependencies.
 
 ```
+$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 $ pip install -r requirements.txt
+
+$ python -m pip install  aws-cdk.aws-ec2
+
+$ aws configure
+ 
 ```
 
 install CDK
