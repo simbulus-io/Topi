@@ -37,8 +37,20 @@ const createEvent = async (req: Request, res: Response) => {
 }
 
 const deleteEvent = async (req: Request, res: Response) => {
+
+    // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
+
+    // delete event corresponding to _id
+    db.collection('events')
+    .deleteOne({ "id": req.body.id })
+    .then(event => {
+        return res.status(200).json({ event })
+    })
+    .catch(error => {
+        return res.status(500).json({ msg: error.message })
+    })
 }
 
 export default {
