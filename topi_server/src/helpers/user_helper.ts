@@ -60,11 +60,27 @@ const getInfo = async (req: Request, res: Response, next: NextFunction) => {
     .toArray(function (err, users) {
         res.send(users)
     })
-    
+}
+
+
+// need to delete user
+const deleteUser = (req: Request, res: Response) => {
+    const mongo: MongoDBs = req.app.get('mongo');
+    const db = mongo.topi_db;
+
+    db.collection('users')
+    .deleteOne({ _id: req.params.id })
+    .then(user => {
+        return res.status(200).json({ user })
+    })
+    .catch(error => {
+        return res.status(500).json({ msg: error.message })
+    })
 }
 
 export default {
     login,
     register,
     getInfo,
+    deleteUser
 }
