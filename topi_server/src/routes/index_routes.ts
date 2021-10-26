@@ -4,6 +4,7 @@ import { Request, Response, Router } from 'express';
 import { RoutesBase } from './routes_base';
 import { serialize } from 'v8';
 import userHelper from '../helpers/user_helper';
+import eventHelper from '../helpers/schedule_helper';
 
 
 const ver = (function() {
@@ -25,7 +26,12 @@ export class IndexRoutes extends RoutesBase {
     router.get(`${RoutesBase.API_BASE_URL}/get-info`, userHelper.getInfo)
     router.delete(`${RoutesBase.API_BASE_URL}/delete/:id`, userHelper.deleteUser)
 
+    router.get(`${RoutesBase.API_BASE_URL}/get-events`, eventHelper.getEvents)
+    router.post(`${RoutesBase.API_BASE_URL}/create-event`, eventHelper.createEvent)
+    router.delete(`${RoutesBase.API_BASE_URL}/delete-event/:id`, eventHelper.deleteEvent)
     
+
+
     router.get(`${RoutesBase.API_BASE_URL}/home`, (req: Request, res: Response) => {
       res.sendFile('topi.html', { root: path.join(__dirname, '../../', 'public') });
     });
