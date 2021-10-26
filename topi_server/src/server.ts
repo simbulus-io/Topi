@@ -82,6 +82,7 @@ export class Server {
     new IndexRoutes(router);
 
     this.app.use(router);
+    //this.app.use(Routes);
   }
 
 }
