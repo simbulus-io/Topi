@@ -16,17 +16,17 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     db.collection('users')
     .findOne({ email })
     .then(user => {
-        if (user == null) {
-            return res.status(403).send('Incorrect email/password information')
+        if (user === null) {
+            return res.status(403).send('Incorrect email/password Information')
         }
         if (user.password == password) {
             return res.status(200).json({ user })
         } else {
-            return res.send('Incorrect email/password information')
+            return res.send('Incorrect email/password information!')
         }
     })
     .catch (error => {
-        return res.status(403).json({ err: error, msg: error.message })
+        return res.status(403).json({ err: error, msg: error.message, input: email, input2: password })
     })
 }
 
