@@ -7,7 +7,7 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" onSubmit={submitForm} action="http://localhost:5000/users/login" method="post">
+        <form id="login-form" onSubmit={submitForm} action="http://localhost:5104/topi/v1.0/login" method="GET">
 
             <div class="container">
                 <label style="font-size:20px" for="email"><b>Email</b></label>
