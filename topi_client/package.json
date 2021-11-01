@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "concurrently \"yarn run serv\" \"yarn run cli\"",
+    "serve": "yarn run cli",
     "build": "vue-cli-service build",
     "test": "npx jest",
     "lint": "vue-cli-service lint",

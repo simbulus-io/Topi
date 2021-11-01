@@ -7,8 +7,7 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5000/users/create-user" method="post">
-
+        <form id="login-form" action="http://localhost:5104/topi/v1.0/register" method="post">
             <div class="container">
                 <label style="font-size:20px" for="firstName"><b>First Name</b></label>
                 <input type="text" placeholder="Enter Your first name" name="firstName" required>
@@ -28,7 +27,7 @@
                 </div>
             </div>
         </form>
-
+        
         <div id="options">
                 <ul id="ul-links">            
                     <li><router-link to="/about">About Saga Education</router-link></li>
@@ -38,25 +37,18 @@
                 </ul>
         </div>  
     </div>
+    
 </div>
 </template>
 
 
 <script lang="ts">
 
-// const URL = 'http://localhost:5000/users/login'
-
 export default {
     
-
-    // mounted() {
-    //     fetch(URL)
-    //     .then(res => res.json()
-    //     .then(result => {
-    //         console.log('RESULT' + result)
-    //     }));
-    // }
 }
+  
+    
 </script>
 
 

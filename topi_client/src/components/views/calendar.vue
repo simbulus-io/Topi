@@ -54,8 +54,8 @@
             <div class="cal">
                 <ul class="events">
                     <li class="media" v-for="event in events" v-bind:key="event.firstName">
-                        <p class="event">{{event.date}}</p>
-                        <p class="event">{{event.extraInfo}}</p>
+                        <p class="event">{{event}}</p>
+                        <p class="event">{{event.info}}</p>
                     </li>
                 </ul>
             </div>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-const URL = 'http://localhost:5000/users/get-events'
+const URL = 'http://localhost:5104/topi/v1.0/get-events'
 
 export default {
     name: 'calendar',
