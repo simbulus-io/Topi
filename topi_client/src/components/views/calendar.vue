@@ -10,51 +10,27 @@
         <div class="col">
             <div class="cal">
                 <div class="cal-body">
-                    <h1> Tutoring Sessions </h1>
-                    <div class="info">
-                        <p class="event"> 
-                            <b style="color:#2c3e50">CSCI 370 Tutoring </b>
-                            <a href style="text-decoration:none">08/14/21 </a>
-                            <vid > <a href>&#9658;</a></vid>
-                            
-                        </p>
-                        
-                        <p class="event"> 
-                            <b style="color:#2c3e50">CSCI 406 Tutoring </b>
-                            <a href style="text-decoration:none">08/16/21 </a>
-                            <vid > <a href>&#9658;</a></vid>
-                        </p>
-                        <p class="event"> 
-                            <b style="color:#2c3e50">CSCI 304 Tutoring </b>
-                            <a href>08/18/21 </a>
-                            <vid> <a href>&#9658;</a></vid>
-                        </p>
-
-                        <button type="submit" class="new-meeting">New Meeting</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cal">
-                <div class="cal-body">
                     <h1> Events </h1>
-
                     <p class="info">
                         <b class="media" v-for="event in events" v-bind:key="event._id">
                             <p class="event"> {{event.info}} | {{event.date}} | 
-                            <button class="event-button" @click='deleteEvent'> delete event </button>
+                            <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p>
                         </b>
                     </p>
-                    
                     <p><button type="submit" class="new-meeting">New Meeting</button></p>
-                    <p><button class="new-meeting"> Create Event </button></p>
-
-
                 </div>
             </div>
-
-
+            <div class="cal">
+                <div class="cal-body">
+                    <h1>Add events</h1>
+                    <p><label for="info"><b>Information</b></label></p>
+                    <p><input type="info" placeholder="Event Name" v-model="infoX" required></p>
+                    <p><label for="date"><b>Date</b></label></p>
+                    <p><input type="date" placeholder="Event Date" v-model="dateX" required></p>
+                    <button class="new-meeting" @click='createEvent'>Add Event</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -62,23 +38,58 @@
 
 <script>
 const URL = 'http://localhost:5104/topi/v1.0/get-events'
+const dURL = 'http://localhost:5104/topi/v1.0/delete-event' 
+const cURL = 'http://localhost:5104/topi/v1.0/create-event'
 
 export default {
-    // name: 'calendar',
 
     data: () => ({
-        events: []
+        events: [],
+        infoX: '',
+        dateX: '',
     }),
+
     methods: {
-        deleteEvent: function () {
-            fetch('http://localhost:5104/topi/v1.0/delete-event')
+        
+        getEvents: function() {
+            fetch(URL)
+                .then(res => res.json())
+                .then(result => this.events = result )
+                .catch(err => console.log(err.message))
+        },
+
+        deleteEvent: function (id) {
+            return fetch(`${dURL}/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(this.getEvents())
+            .catch(err => console.log(err.message))
+        },
+
+        createEvent: function() {
+            const temp = {
+                date: this.infoX,
+                info: this.dateX
+            }
+            if (temp == null) { console.log('issue')}
+            return fetch(cURL,  {
+                method: 'POST',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(temp),
+            })
+            .then(
+                this.info = '',
+                this.date = ''
+            )
+            .then(res => res.json())
+            .then(this.getEvents())
+            .catch(err => console.log(err.message))
         }
+
     },
     mounted() {
-        fetch(URL)
-            .then(res => res.json())
-            .then(result => this.events = result )
-            .catch(err => console.log(err.message))
+        this.getEvents();
     },
     
 
@@ -86,7 +97,22 @@ export default {
 </script>
 
 <style scoped>
-
+input[type=info] {
+    width: 90%;
+    padding: 20px 10px ;
+    /* margin: 20px 0; */
+    display:table-column;
+    border: 5px solid #ccc;
+    box-sizing: border-box;
+}
+input[type=date]{
+    width: auto;
+    padding: 10px 10px ;
+    /* margin: 20px 0; */
+    display:table-column;
+    border: 5px solid #ccc;
+    box-sizing: border-box;
+}
 /* Row, Sections in row */
 .event-button{
     padding: 5px;
@@ -94,6 +120,7 @@ export default {
     border-style: outset;
     background-color:salmon ;
     color: black; 
+    cursor: pointer;
 }
 .row {
     display: inline-flex;
