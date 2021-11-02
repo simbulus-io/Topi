@@ -7,7 +7,7 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" onSubmit={submitForm} action="http://localhost:5104/topi/v1.0/login" method="GET">
+        <form id="login-form" action="http://localhost:5104/topi/v1.0/login" method="GET">
 
             <div class="container">
                 <label style="font-size:20px" for="email"><b>Email</b></label>
@@ -18,7 +18,7 @@
                     <div class="remember">
                             <button type="submit" id="login">Login</button>
                         <label>
-                            <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
+                        <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
                         </label>
                     </div>
             </div>
@@ -39,19 +39,11 @@
 
 <script lang="ts">
 
-import defineComponent from 'vue';
-
-const URL = 'http://localhost:5000/users/login'
-
 export default {
 
     
 }
     
-
-    // mounted() {
-        
-    // }
 
 </script>
 

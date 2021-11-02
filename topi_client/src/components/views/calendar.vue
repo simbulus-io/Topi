@@ -128,15 +128,20 @@ input[type=date]{
 }
 .col {
     border: 100px;
+    display: inline-flex;
 }
 .cal {
+    overflow:scroll;
+    
+    width: 300px;
+    height: 400px;
     border-radius: 20px;
     margin: 10px;
     padding: 20px;
     background-color: blanchedalmond;
     border: 5px #04AA6D;
     border-style: groove;
-    display: inline-flex;
+    /* display: inline-flex; */
     white-space: normal;
 }
 
