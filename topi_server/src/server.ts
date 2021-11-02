@@ -13,6 +13,8 @@ import { Mongo } from './config/mongo';
 import { MongoDBs, MongoHelper } from './helpers/mongo_helper';
 import { PP } from './helpers/logger_helper';
 
+import { Request, Response, NextFunction } from 'express';
+
 export class Server {
 
   public static bootstrap(): Server {
@@ -48,6 +50,15 @@ export class Server {
       const mongo = await MongoHelper.connect(config.mongo);
       this.app.set('mongo', mongo);
 
+      this.app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin X-Requested-With, Content-Type, Accept, Authorization');
+        if (req.method == 'OPTIONS') {
+          res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+          return res.status(200).json({});
+        }
+        next();
+      })
       // (SK needed?)
       this.app.use(cookieParser());
 
