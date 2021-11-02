@@ -34,31 +34,27 @@
                     </div>
                 </div>
             </div>
+
             <div class="cal">
                 <div class="cal-body">
-                    <h1> Test Dates </h1>
-                    <div class="info">
-                        <p class="event"> 
-                            <b style="color:#2c3e50">Algorithms: 09/15/21 </b>
-                        </p>
-                        <p class="event"> 
-                            <b style="color:#2c3e50">Programming Languages: 09/15/21</b>
-                        </p>
-                        <p class="event"> 
-                            <b style="color:#2c3e50">Prob/Stats: TBD </b>
-                        </p>
-                    </div>
+                    <h1> Events </h1>
+
+                    <p class="info">
+                        <b class="media" v-for="event in events" v-bind:key="event._id">
+                            <p class="event"> {{event.info}} | {{event.date}} | 
+                            <button class="event-button" @click='deleteEvent'> delete event </button>
+                            </p>
+                        </b>
+                    </p>
+                    
+                    <p><button type="submit" class="new-meeting">New Meeting</button></p>
+                    <p><button class="new-meeting"> Create Event </button></p>
+
+
                 </div>
             </div>
 
-            <div class="cal">
-                <ul class="events">
-                    <li class="media" v-for="event in events" v-bind:key="event.firstName">
-                        <p class="event">{{event}}</p>
-                        <p class="event">{{event.info}}</p>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </div>
 </div>
@@ -68,15 +64,21 @@
 const URL = 'http://localhost:5104/topi/v1.0/get-events'
 
 export default {
-    name: 'calendar',
+    // name: 'calendar',
 
     data: () => ({
         events: []
     }),
+    methods: {
+        deleteEvent: function () {
+            fetch('http://localhost:5104/topi/v1.0/delete-event')
+        }
+    },
     mounted() {
         fetch(URL)
             .then(res => res.json())
-            .then(result => { this.events = result.events })
+            .then(result => this.events = result )
+            .catch(err => console.log(err.message))
     },
     
 
@@ -86,6 +88,13 @@ export default {
 <style scoped>
 
 /* Row, Sections in row */
+.event-button{
+    padding: 5px;
+    border-radius: 0;
+    border-style: outset;
+    background-color:salmon ;
+    color: black; 
+}
 .row {
     display: inline-flex;
     margin: 10px;
