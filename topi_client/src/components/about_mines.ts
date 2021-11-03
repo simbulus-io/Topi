@@ -13,12 +13,22 @@ export default class AboutMines extends Vue {
     window.onload = function() {
       const domain = 'meet.jit.si';
       const options = {
-        roomName: 'JitsiMeetAPIExample',
+        roomName: 'TOPI',
         width: 700,
         height: 700,
         parentNode: document.querySelector('#meet'),
       };
       const api = new JitsiMeetExternalAPI(domain, options);
+      api.addEventListener('participantRoleChanged', function($event:any) {
+        if ($event.role === 'moderator') {
+          api.executeCommand('password', 'The Password');
+        }
+      });
+      // join a protected channel
+      api.on('passwordRequired', function ()
+      {
+        api.executeCommand('password', 'The Password');
+      });
     };
     
   }
