@@ -30,7 +30,9 @@ export class IndexRoutes extends RoutesBase {
     router.post(`${RoutesBase.API_BASE_URL}/create-event`, eventHelper.createEvent)
     router.delete(`${RoutesBase.API_BASE_URL}/delete-event/:id`, eventHelper.deleteEvent)
     
-
+    router.get('/foo', (req: Request, res: Response) => {
+      res.sendFile('topi.html', { root: path.join(__dirname, '../../', 'public') });
+    });
 
     router.get(`${RoutesBase.API_BASE_URL}/home`, (req: Request, res: Response) => {
       res.sendFile('topi.html', { root: path.join(__dirname, '../../', 'public') });

@@ -5,7 +5,7 @@ import { MongoDBs } from '../helpers/mongo_helper';
 
 
 // login 
-const login = (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
     
     // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
@@ -13,12 +13,12 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 
     // set email & pw, then find corresponding pw & match
     let { email, password } = req.body;
+    console.log(`[DEBUG] - Email: ${email}`)
+    console.log(`[DEBUG] - Password: ${password}`)
     db.collection('users')
     .findOne({ email })
     .then(user => {
-        // if (user === null) {
-        //     return res.status(403).send('Incorrect email/password Information')
-        // }
+        console.log(`[DEBUG] - User: ${user}`)
         if (user.password === password) {
             return res.status(200).json({ user })
         } else {
