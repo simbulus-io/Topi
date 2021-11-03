@@ -1,72 +1,131 @@
 <template>
 <div>
     <div class="title">
-        <!-- <img style="width:100px; height:100px;" src="../../images/logo.png">  -->
-        <h1> Topi Login Page </h1>
+        <h1> {{ Welcome }} </h1>
         <p><i>Welcome back!</i></p>
     </div>
+    <div>
 
-    <div style="border: 0">
-        <form id="login-form" method='get'>
-
+        <form id="login-form" v-on:submit='tryLogin'>
             <div class="container">
-                <label style="font-size:20px" for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Your Email" name="email" v-model="emailX" required>
-                <label style="font-size:20px" for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Your Password" name="password" v-model="pwX" required>
 
-                    <div class="remember">
-                            <button type='submit' id="login">Login</button>
-                        <label>
-                        <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
-                        </label>
-                    </div>
+                <!-- Email Input -->
+                <label style="font-size:20px" for="email"><b>Email</b></label>
+                <input type="text" 
+                    placeholder="Enter Your Email" 
+                    v-model="email" 
+                    required>
+
+                <!-- Password Input -->
+                <label style="font-size:20px" for="password"><b>Password</b></label>
+                <input type="password" 
+                    placeholder="Enter Your Password" 
+                    v-model="password" 
+                    required>
+
+                <!-- Button & Checkbox -->
+                <div class="remember">
+                    <button 
+                        type='submit' 
+                        id="login">
+                        Login
+                    </button>
+                    <label>
+                        <input 
+                        type="checkbox" 
+                        checked="checked" 
+                        name="remember"> 
+                        <i>Remember me</i>
+                    </label>
+                </div>
             </div>
         </form>
 
+        <!-- Nav. Links -->
         <div id="options">
-                <ul id="ul-links">            
-                    <li><router-link to="/about">About Saga Education</router-link></li>
-                    <li><router-link to="/about">About Mines Field Session Group Topi</router-link></li>
-                    <li><span class="password"><router-link to='/forgot'>Forgot Password?</router-link></span></li>
-                    <li><router-link to="/">Back Home?</router-link></li>
-                </ul>
-        </div>  
+            <ul id="ul-links">            
+                <li><router-link to="/about">{{ About }}</router-link></li>
+                <li><router-link to="/about">{{ Mines }}</router-link></li>
+                <li><router-link to='/forgot'>{{ Forgot }}</router-link></li>
+                <li><router-link to="/">{{ Home }}</router-link></li>
+            </ul>
+        </div> 
+
     </div>
 </div>
 </template>
 
 
 <script lang="ts">
-const URL = '/topi/login'
-
-
 
 export default {
 
-    data: () => ({
-        emailX: '',
-        pwX: ','
-    }),
+    data () {
+        return {
+            Welcome: 'Topi Login Page',
+            About: 'About Saga Education',
+            Mines: 'About Mines Field Session Group Topi',
+            Forgot: 'Forgot Password?',
+            Home: 'Back Home?',
 
-    methods: {
-        loginUser: function(this:any) {
-            console.log(this.data)
-            fetch(URL, {
+            email: '',
+            password: '',
+        }
+    },
+     methods: {
+        tryLogin(this: any) {
+            console.log(this.email)
+            return fetch('/topi/login', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify(this.data),
+                body: JSON.stringify({
+                    email: this.email,
+                    password: this.password
+                })
             })
             .then(res => res.json())
-            .catch(err => console.log(err.message))
-        },
-        
+            .catch(err => err.message)
+        }
     }
 }
-    
 
 </script>
+    
+
+    
+
+
+    // methods: {
+    //     // loginUser: function(this:any) {
+    //     //     console.log(this.data)
+    //     //     fetch(URL, {
+    //     //         method: 'GET',
+    //     //         headers: { 'Content-Type': 'application/json' },
+    //     //         credentials: 'include',
+    //     //         body: JSON.stringify(this.data),
+    //     //     })
+    //     //     .then(res => res.json())
+    //     //     .catch(err => console.log(err.message))
+    //     // },
+
+    //     const login = () => {
+    //         try {
+    //             const res = await fetch(URL, {
+    //                 method: 'get',
+    //                 headers: { 'Content-Type': 'application/json' },
+    //                 body: JSON.stringify({ 
+    //                     email: this.email,
+    //                     password: this.password
+    //                  })
+    //             })
+    //         } catch (err) {
+    //             console.log(err.message)
+    //         }
+    //     }
+        
+    // }
+
 
 
 <style scoped>

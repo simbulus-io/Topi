@@ -9,7 +9,7 @@ proxy = '127.0.0.1'
 module.exports = {
     devServer: {
         proxy: {
-
+                
             // testing 
             '/foo': {
                 target: 'http://localhost:5104',
@@ -17,12 +17,12 @@ module.exports = {
 
             '/topi/login': {
                 target: 'http://localhost:5104',
-                pathRewrite: { 'topi/login': '/topi/v1.0/login'}
+                pathRewrite: { '/topi/login': '/topi/v1.0/login'}
             },
 
-            '/register': {
+            '/topi/register': {
                 target: 'http://localhost:5104',
-                pathRewrite: { '/register': '/topi/v1.0/register'}
+                pathRewrite: { '/topi/register': '/topi/v1.0/register'}
             },
 
             '/create-event': {
