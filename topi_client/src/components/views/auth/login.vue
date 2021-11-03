@@ -73,6 +73,11 @@ export default {
         }
     },
      methods: {
+
+        // Trying to send email & password using fetch (which should go through proxy)
+        // but when console logging email & password in user_helpers.ts login() func. 
+        // they are null / undefined
+        // * same issue as registerUser() in register.vue *
         tryLogin(this: any) {
             console.log(this.email)
             return fetch('/topi/login', {
