@@ -12,9 +12,9 @@
                 <div class="cal-body">
                     <h1> Events </h1>
                     <p class="info">
-                        <b class="media" v-for="event in events" v-bind:key="event._id">
+                        <b class="media" v-for="(event, index) in events" v-bind:key="event._id">
                             <p class="event"> {{event.info}} | {{event.date}} | 
-                            <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
+                            <button class="event-button" @click='deleteEvent(event._id, index)'> delete event </button>
                             </p>
                         </b>
                     </p>
@@ -52,44 +52,39 @@ export default {
     methods: {
         
         getEvents: function() {
-            fetch(URL)
+            return fetch(URL)
                 .then(res => res.json())
                 .then(result => this.events = result )
                 .catch(err => console.log(err.message))
         },
 
-        deleteEvent: function (id) {
+        deleteEvent: function (id, index) {
+
             return fetch(`${dURL}/${id}`, {
                 method: 'DELETE'
             })
-            .then(res => res.json())
             .then(this.getEvents())
             .catch(err => console.log(err.message))
         },
 
         createEvent: function() {
-            const temp = {
-                date: this.infoX,
-                info: this.dateX
+            var temp = {
+                date: this.dateX,
+                info: this.infoX
             }
-            if (temp == null) { console.log('issue')}
-            return fetch(cURL,  {
+
+            return fetch('/create-event',  {
                 method: 'POST',
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify(temp),
             })
-            .then(
-                this.info = '',
-                this.date = ''
-            )
-            .then(res => res.json())
             .then(this.getEvents())
             .catch(err => console.log(err.message))
-        }
+        },
 
     },
     mounted() {
-        this.getEvents();
+        this.getEvents()
     },
     
 

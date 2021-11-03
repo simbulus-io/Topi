@@ -7,19 +7,19 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5104/topi/v1.0/register" method="post">
+        <form id="login-form" method="post">
             <div class="container">
                 <label style="font-size:20px" for="firstName"><b>First Name</b></label>
-                <input type="text" placeholder="Enter Your first name" name="firstName" required>
+                <input type="text" placeholder="Enter Your first name" name="firstName" v-model="first" required>
 
                 <label style="font-size:20px" for="lastName"><b>Last Name</b></label>
-                <input type="text" placeholder="Enter Your last name" name="lastName" required>
+                <input type="text" placeholder="Enter Your last name" name="lastName" v-model="last" required>
 
                 <label style="font-size:20px" for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Your Email" name="email" required>
+                <input type="text" placeholder="Enter Your Email" name="email" v-model="email" required>
 
                 <label style="font-size:20px" for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Your Password" name="password" required>
+                <input type="password" placeholder="Enter Your Password" name="password" v-model="pw" required>
 
                 <div class="remember">
                         <button type="submit" id="login">Sign Up</button>
@@ -45,7 +45,25 @@
 <script lang="ts">
 
 export default {
-    
+    data: () => ({
+        first: '',
+        last: '',
+        email: '',
+        pw: ''
+    }),
+
+    methods: {
+        registerUser(this: any) {
+            return fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(this.data)
+            })
+            .then(res => res.json())
+            .catch(err => err.message)
+        }
+    }
 }
   
     

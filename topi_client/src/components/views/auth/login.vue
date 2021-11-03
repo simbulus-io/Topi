@@ -7,16 +7,16 @@
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5104/topi/v1.0/login" method="GET">
+        <form id="login-form" method='get'>
 
             <div class="container">
                 <label style="font-size:20px" for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Your Email" name="email" required>
+                <input type="text" placeholder="Enter Your Email" name="email" v-model="emailX" required>
                 <label style="font-size:20px" for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Your Password" name="password" required>
+                <input type="password" placeholder="Enter Your Password" name="password" v-model="pwX" required>
 
                     <div class="remember">
-                            <button type="submit" id="login">Login</button>
+                            <button type='submit' id="login">Login</button>
                         <label>
                         <input type="checkbox" checked="checked" name="remember"> <i>Remember me</i>
                         </label>
@@ -38,10 +38,31 @@
 
 
 <script lang="ts">
+const URL = '/topi/login'
+
+
 
 export default {
 
-    
+    data: () => ({
+        emailX: '',
+        pwX: ','
+    }),
+
+    methods: {
+        loginUser: function(this:any) {
+            console.log(this.data)
+            fetch(URL, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(this.data),
+            })
+            .then(res => res.json())
+            .catch(err => console.log(err.message))
+        },
+        
+    }
 }
     
 
