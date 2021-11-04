@@ -115,3 +115,9 @@ then run the following commands to get the api up and running
 *`node dist/topi_main.js`
 ```
 SUCCESS you just deployed the topi api on an ec2 server.
+
+
+To connect using ssh:
+```
+*` ssh -i "topi.pem" ubuntu@18.217.7.196`
+```
