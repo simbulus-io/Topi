@@ -122,24 +122,5 @@ To connect using ssh in the terminal outside of the ec2 instance:
 cd Topi/topi_ec2/
 ```
 ```
-ssh -i "topi.pem" ubuntu@18.217.7.196
-```
-Test:
-```
-Content-Type: multipart/mixed; boundary="//"
-MIME-Version: 1.0
-
---//
-Content-Type: text/cloud-config; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="cloud-config.txt"
-
-#cloud-config
-cloud_final_modules:
-- [users-groups, once]
-users:
-  - name: ubuntu
-    ssh-authorized-keys: 
-    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIuUGcd2PcNsO7tpsFn4jUjLny1XIsK1Ie/Oo4kIqH2T/JB1xCpxze0R/34tUn2Tcr4FyCBHWdEtB6FQVrom0jiaY73FY2Lc491krtFk7nE8fLinEVnOk8tsikF5mmaU9MsPzat6N6AjzmWUxv4pNI6KANprjM5Rr9KgTn+00INotxYEqFrJ8PeoKQzI+jqlngLsld01XpPgOwrc+zN/Xqr7ZqvjC8ufQ9cXCTGFXF1J0nAdV3N/ZD2VcvBblgLhgs4nkJpUsRtfsSDA+H1ECA3lKEzw1QPV8HZfN5eE1iUdG884U87h0c6D6Y2IjVUlb7+v7UgZ5ZuVb4CQ1v+GYV
+ssh -i "topi.pem" ubuntu@<EC2 IP address>
 ```
