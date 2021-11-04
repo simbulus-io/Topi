@@ -50,6 +50,7 @@ export class Server {
       const mongo = await MongoHelper.connect(config.mongo);
       this.app.set('mongo', mongo);
 
+      // temp
       this.app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', '*');
@@ -59,6 +60,7 @@ export class Server {
         }
         next();
       })
+      
       // (SK needed?)
       this.app.use(cookieParser());
 

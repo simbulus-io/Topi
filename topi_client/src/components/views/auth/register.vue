@@ -1,43 +1,59 @@
 <template>
 <div>
     <div class="title">
-        <!-- <img style="width:100px; height:100px;" src="../../images/logo.png">  -->
-        <h1> Topi Registration Page </h1>
+        <h1> {{ Welcome }} </h1>
         <p><i>Welcome to Topi!</i></p>
     </div>
 
     <div style="border: 0">
-        <form id="login-form" action="http://localhost:5104/topi/v1.0/register" method="post">
+        <form id="login-form" v-on:submit.prevent='registerUser'>
             <div class="container">
+
+                <!-- Input first name -->
                 <label style="font-size:20px" for="firstName"><b>First Name</b></label>
-                <input type="text" placeholder="Enter Your first name" name="firstName" required>
+                <input type="text" 
+                    placeholder="Enter Your first name" 
+                    v-model="first" 
+                    required>
 
+                <!-- Input last name -->
                 <label style="font-size:20px" for="lastName"><b>Last Name</b></label>
-                <input type="text" placeholder="Enter Your last name" name="lastName" required>
+                <input type="text" 
+                    placeholder="Enter Your last name" 
+                    v-model="last" 
+                    required>
 
+                <!-- Input email -->
                 <label style="font-size:20px" for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Your Email" name="email" required>
+                <input type="text" 
+                    placeholder="Enter Your Email" 
+                    v-model="email" 
+                    required>
 
+                <!-- Input password -->
                 <label style="font-size:20px" for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Your Password" name="password" required>
+                <input type="password" 
+                    placeholder="Enter Your Password" 
+                    v-model="pw"
+                    required>
 
+                <!-- Button -->
                 <div class="remember">
-                        <button type="submit" id="login">Sign Up</button>
-    
+                    <button type="submit" id="login">Sign Up</button>
                 </div>
             </div>
         </form>
         
+        <!-- Nav. links -->
         <div id="options">
-                <ul id="ul-links">            
-                    <li><router-link to="/about">About Saga Education</router-link></li>
-                    <li><router-link to="/about">About Mines Field Session Group Topi</router-link></li>
-                    <li><span class="password"><router-link to='/forgot'>Forgot Password?</router-link></span></li>
-                    <li><router-link to="/">Back Home?</router-link></li>
-                </ul>
+            <ul id="ul-links">            
+                <li><router-link to="/about"> {{ About }} </router-link></li>
+                <li><router-link to="/about"> {{ Mines }} </router-link></li>
+                <li><router-link to='/forgot'> {{ Forgot }}</router-link></li>
+                <li><router-link to="/"> {{Home}}</router-link></li>
+            </ul>
         </div>  
     </div>
-    
 </div>
 </template>
 
@@ -45,7 +61,38 @@
 <script lang="ts">
 
 export default {
-    
+    data ()  {
+        return {
+            Welcome: 'Topi Registration Page',
+            About: 'About Saga Education',
+            Mines: 'About Mines Field Session Group Topi',
+            Forgot: 'Forgot Password?',
+            Home: 'Back Home?',
+
+            first: '',
+            last: '',
+            email: '',
+            pw: ''
+        }
+    },
+
+    methods: {
+        registerUser(this: any) {
+            return fetch('/topi/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    firstName: this.first,
+                    lastName: this.last,
+                    email: this.email,
+                    password: this.pw
+                })
+            })
+            .then(res => res.json())
+            .catch(err => err.message)
+        }
+    }
 }
   
     
