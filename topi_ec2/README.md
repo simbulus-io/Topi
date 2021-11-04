@@ -80,47 +80,66 @@ For deployment!!!:
 
 In vscode or wherever you have your code bank the command to deploy is:
 ```
-*`cdk deploy`
+cdk deploy
 ```
 then within your aws console connect to your ec2 instance that you just created and pull from the topi github using the command
 ```
-*`git clone https://github.com/simbulus-io/Topi.git`
+git clone https://github.com/simbulus-io/Topi.git
 ```
 install nvm and node version 14.18.0 using the commands:
 ```
-*`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 ```
 ```
-*`. ~/.nvm/nvm.sh`
+. ~/.nvm/nvm.sh
 ```
 ```
-*`nvm install 14.18.0`
+nvm install 14.18.0
 ```
 then once you have node 14.18.0 installed you should install yarn version 1.22.15 using the commands:
 ```
-*`curl -o- -L https://yarnpkg.com/install.sh | bash`
+curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 ```
-*`source ~/.bashrc`
+source ~/.bashrc
 ```
 then  cd into Topi/topi_server using:
 ```
-*`cd Topi/topi_server`
+cd Topi/topi_server
 ```
 then run the following commands to get the api up and running
 ```
-*`yarn build`
+yarn build
 ```
 ```
-*`node dist/topi_main.js`
+node dist/topi_main.js
 ```
 SUCCESS you just deployed the topi api on an ec2 server.
 
 
 To connect using ssh in the terminal outside of the ec2 instance:
 ```
-*`cd Topi/topi_ec2/`
+cd Topi/topi_ec2/
 ```
 ```
-*` ssh -i "topi.pem" ubuntu@18.217.7.196`
+ssh -i "topi.pem" ubuntu@18.217.7.196
+```
+Test:
+```
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+cloud_final_modules:
+- [users-groups, once]
+users:
+  - name: ubuntu
+    ssh-authorized-keys: 
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIuUGcd2PcNsO7tpsFn4jUjLny1XIsK1Ie/Oo4kIqH2T/JB1xCpxze0R/34tUn2Tcr4FyCBHWdEtB6FQVrom0jiaY73FY2Lc491krtFk7nE8fLinEVnOk8tsikF5mmaU9MsPzat6N6AjzmWUxv4pNI6KANprjM5Rr9KgTn+00INotxYEqFrJ8PeoKQzI+jqlngLsld01XpPgOwrc+zN/Xqr7ZqvjC8ufQ9cXCTGFXF1J0nAdV3N/ZD2VcvBblgLhgs4nkJpUsRtfsSDA+H1ECA3lKEzw1QPV8HZfN5eE1iUdG884U87h0c6D6Y2IjVUlb7+v7UgZ5ZuVb4CQ1v+GYV
 ```
