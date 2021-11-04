@@ -90,13 +90,13 @@ install nvm and node version 14.18.0 using the commands:
 ```
 *`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
 ```
+```
 *`. ~/.nvm/nvm.sh`
 ```
 ```
 *`nvm install 14.18.0`
 ```
 then once you have node 14.18.0 installed you should install yarn version 1.22.15 using the commands:
-```
 ```
 *`curl -o- -L https://yarnpkg.com/install.sh | bash`
 ```
