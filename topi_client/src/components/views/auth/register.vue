@@ -90,8 +90,10 @@ export default {
                 })
             })
             .then(res => res.json())
+            .then(this.$router.push('/login'))
             .catch(err => err.message)
-        }
+        },
+
     }
 }
   

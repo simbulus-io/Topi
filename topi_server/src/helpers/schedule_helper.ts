@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson';
 import { Request, Response, NextFunction } from 'express';
 import { MongoDBs } from './mongo_helper';
 
@@ -43,11 +44,9 @@ const deleteEvent = async (req: Request, res: Response) => {
     const db = mongo.topi_db;
 
     // delete event corresponding to _id
-    db.collection('events')
-    .deleteOne({ "id": req.body.id })
-    .then(event => {
-        return res.status(200).json({ event })
-    })
+    console.log(req.body.id)
+    db.collection('events').deleteOne({ '_id': req.body.id })
+    
     .catch(error => {
         return res.status(500).json({ msg: error.message })
     })

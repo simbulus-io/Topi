@@ -12,9 +12,9 @@
                 <div class="cal-body">
                     <h1> Events </h1>
                     <p class="info">
-                        <b class="media" v-for="(event, index) in events" v-bind:key="event._id">
+                        <b class="media" v-for="event in events" v-bind:key="event._id">
                             <p class="event"> {{event.info}} | {{event.date}} | 
-                            <button class="event-button" @click='deleteEvent(event._id, index)'> delete event </button>
+                            <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p>
                         </b>
                     </p>
@@ -43,11 +43,13 @@ const cURL = 'http://localhost:5104/topi/v1.0/create-event'
 
 export default {
 
-    data: () => ({
-        events: [],
-        infoX: '',
-        dateX: '',
-    }),
+    data () {
+        return {
+            events: [],
+            infoX: '',
+            dateX: '',
+        }
+    },
 
     methods: {
         
@@ -58,27 +60,28 @@ export default {
                 .catch(err => console.log(err.message))
         },
 
-        deleteEvent: function (id, index) {
-
-            return fetch(`${dURL}/${id}`, {
-                method: 'DELETE'
+        deleteEvent: function (id) {
+            console.log(id)
+            fetch('/topi/delete-event', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                // body: JSON.stringify(id)
             })
             .then(this.getEvents())
             .catch(err => console.log(err.message))
         },
 
         createEvent: function() {
-            var temp = {
+            const temp = {
                 date: this.dateX,
                 info: this.infoX
             }
-
-            return fetch('/create-event',  {
+            fetch('/create-event',  {
                 method: 'POST',
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify(temp),
             })
-            .then(this.getEvents())
+            // .then(this.getEvents())
             .catch(err => console.log(err.message))
         },
 

@@ -4,7 +4,6 @@ import { error } from 'winston';
 import { MongoDBs } from '../helpers/mongo_helper';
 
 
-// login 
 const login = async (req: Request, res: Response, next: NextFunction) => {
     
     // connect to mongo
@@ -13,18 +12,28 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
     // set email & pw, then find corresponding pw & match
     let { email, password } = req.body;
+
+    // debug
     console.log(`[DEBUG] - Email: ${email}`)
     console.log(`[DEBUG] - Password: ${password}`)
+
+    // grab user db
     db.collection('users')
     .findOne({ email })
     .then(user => {
+
+        // debug
         console.log(`[DEBUG] - User: ${user}`)
+
+        // "validate"
         if (user.password === password) {
             return res.status(200).json({ user })
         } else {
             return res.send('Incorrect email/password information!')
         }
     })
+
+    // catch any errors (403)
     .catch (error => {
         return res.status(403).json({ err: error, msg: error.message, input: email, input2: password })
     })
@@ -53,7 +62,6 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     ) {
         res.json(users)
     })
-   
 }
 
 

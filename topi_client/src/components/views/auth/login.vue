@@ -6,7 +6,7 @@
     </div>
     <div>
 
-        <form id="login-form" v-on:submit='tryLogin'>
+        <form id="login-form" v-on:submit='tryLogin' method='get'>
             <div class="container">
 
                 <!-- Email Input -->
@@ -50,17 +50,17 @@
                 <li><router-link to="/">{{ Home }}</router-link></li>
             </ul>
         </div> 
-
     </div>
 </div>
 </template>
 
 
 <script lang="ts">
-
+ 
 export default {
-
-    data () {
+    
+    // Any page data vars.
+    data () {   
         return {
             Welcome: 'Topi Login Page',
             About: 'About Saga Education',
@@ -72,12 +72,9 @@ export default {
             password: '',
         }
     },
-     methods: {
 
-        // Trying to send email & password using fetch (which should go through proxy)
-        // but when console logging email & password in user_helpers.ts login() func. 
-        // they are null / undefined
-        // * same issue as registerUser() in register.vue *
+    // Page methods
+    methods: {
         tryLogin(this: any) {
             console.log(this.email)
             return fetch('/topi/login', {
@@ -96,41 +93,6 @@ export default {
 }
 
 </script>
-    
-
-    
-
-
-    // methods: {
-    //     // loginUser: function(this:any) {
-    //     //     console.log(this.data)
-    //     //     fetch(URL, {
-    //     //         method: 'GET',
-    //     //         headers: { 'Content-Type': 'application/json' },
-    //     //         credentials: 'include',
-    //     //         body: JSON.stringify(this.data),
-    //     //     })
-    //     //     .then(res => res.json())
-    //     //     .catch(err => console.log(err.message))
-    //     // },
-
-    //     const login = () => {
-    //         try {
-    //             const res = await fetch(URL, {
-    //                 method: 'get',
-    //                 headers: { 'Content-Type': 'application/json' },
-    //                 body: JSON.stringify({ 
-    //                     email: this.email,
-    //                     password: this.password
-    //                  })
-    //             })
-    //         } catch (err) {
-    //             console.log(err.message)
-    //         }
-    //     }
-        
-    // }
-
 
 
 <style scoped>
