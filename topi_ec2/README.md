@@ -75,3 +75,52 @@ command.
  * `cdk docs`        open CDK documentation
 
 Enjoy!
+
+For deployment!!!:
+
+In vscode or wherever you have your code bank the command to deploy is:
+```
+cdk deploy
+```
+then within your aws console connect to your ec2 instance that you just created and pull from the topi github using the command
+```
+git clone https://github.com/simbulus-io/Topi.git
+```
+install nvm and node version 14.18.0 using the commands:
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+```
+```
+. ~/.nvm/nvm.sh
+```
+```
+nvm install 14.18.0
+```
+then once you have node 14.18.0 installed you should install yarn version 1.22.15 using the commands:
+```
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
+```
+source ~/.bashrc
+```
+then  cd into Topi/topi_server using:
+```
+cd Topi/topi_server
+```
+then run the following commands to get the api up and running
+```
+yarn build
+```
+```
+node dist/topi_main.js
+```
+SUCCESS you just deployed the topi api on an ec2 server.
+
+
+To connect using ssh in the terminal outside of the ec2 instance:
+```
+cd Topi/topi_ec2/
+```
+```
+ssh -i "topi.pem" ubuntu@<EC2 IP address>
+```
