@@ -9,7 +9,7 @@ from aws_cdk import(
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 
 vpcID = "vpc-01cb12e35d9d59f47"
-instanceName = "Topi_Server"
+instanceName = "topi_server"
 instanceType = "t2.micro"
 amiName = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20211021-aced0818-eef1-427a-9e04-8ba38bada306"
 
