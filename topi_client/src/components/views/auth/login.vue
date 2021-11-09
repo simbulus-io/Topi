@@ -56,9 +56,9 @@
 
 
 <script lang="ts">
- 
+import Alert from 'vue-simple-alert'
+import Router from '../../../router'
 export default {
-    
     // Any page data vars.
     data () {   
         return {
@@ -74,13 +74,10 @@ export default {
             check: false
         }
     },
-
-    // Page methods
     methods: {
         async tryLogin(this: any) {
-            console.log(this.email)
             try {
-            const res=await fetch('/topi/login', {
+            const res = await fetch('/topi/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -89,35 +86,38 @@ export default {
                 password: this.password
                 })
             })
-            .then(res => res.json())
-            console.log(res)
-            } catch(err) {
-            return err.message
-            }
-        },
-
-        async validate(user: any) {
-            console.log('VALIDATE ?')
-            try {
-                const check = user ? true : false;
-                
-                if (check) { 
-                    console.log('USER-VALID')
-                } else {
-                    console.log('USER-INVALID')
-                    
-                }
-            } catch(err) {
+            .then(res => {
+                this.validate(res)
+                this.email = '',
+                this.password = ''
+            })
+            } catch(e: any) {
+                const err = e as Error
                 return err.message
             }
-            
+        },
+        async validate(check: any) {
+            console.log('Validating')
+            try {
+                const rt = (check.status == 200) ? true : false
+                if (rt) {
+                    console.log("Status 200: (login)")
+                    Alert.confirm("Login Success!").then(() => {
+                        Router.push('/calendar')
+                    })
+                // TODO : store user using vuex? (persist for cal)
+                } else {
+                    Alert.alert("Invalid login, try again please!")
+                    console.log("Status 403: Incorrect information (login)")
+                }
+            } catch(e: any) {
+                const err = e as Error
+                return err.message
+            }
         }
     }
 }
-
 </script>
-
-
 <style scoped>
 
 /* Title, Logo, Welcome */

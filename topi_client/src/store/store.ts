@@ -5,9 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    Kenny: 'ken',
+    User: 'ken',
   },
   mutations: {
+    loginSuccess(user: any) {
+
+    },
   },
   actions: {
   },

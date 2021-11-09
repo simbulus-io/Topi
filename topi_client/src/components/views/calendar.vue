@@ -2,6 +2,7 @@
 <div>
     <h1> Topi Scheduling Page </h1>
     <p> 
+        <i>Welcome {{currUser}}</i>
         <i>Here you can see your upcoming events, as well as create/delete any
         events as you see fit.</i>
     </p>
@@ -40,11 +41,13 @@
 const URL = 'http://localhost:5104/topi/v1.0/get-events'
 const dURL = 'http://localhost:5104/topi/v1.0/delete-event' 
 const cURL = 'http://localhost:5104/topi/v1.0/create-event'
+import Store from '../../store/store';
 
 export default {
 
     data () {
         return {
+            currUser: Store.state.User,
             events: [],
             infoX: '',
             dateX: '',
@@ -54,6 +57,7 @@ export default {
     methods: {
         
         getEvents: function() {
+            console.log(Store.state.User)
             return fetch(URL)
                 .then(res => res.json())
                 .then(result => this.events = result )

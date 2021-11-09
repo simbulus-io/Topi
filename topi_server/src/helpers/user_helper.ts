@@ -18,12 +18,15 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     // grab user db
     db.collection('users').findOne({ email })
     .then(user => {
-
+        if (user == null) {
+            return res.status(403).send(null)
+        }
         // "validate"
         if (user.password === password) {
+            console.log('Valid password')
             return res.status(200).json({ user })
         } else {
-            return res.send('Incorrect email/password information!')
+            return res.status(403).send(null)
         }
     })
 
@@ -43,13 +46,14 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
     // grab new user info.
     let { firstName, lastName, email, password } = req.body;
-
+    var events:[]
     // insert user into db
     db.collection('users').insertOne({
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password
+        password: password,
+        userEvents: events,
     }, function (
         error,
         users,

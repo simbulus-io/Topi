@@ -33,12 +33,17 @@ module.exports = {
             '/topi/delete-event': {
                 target: 'http://localhost:5104',
                 pathRewrite: { '/delete-event': 'topi/v1.0/delete-event' }
-            }
+            },
 
-            // '/get-events': {
-            //     target: 'http://localhost:5104',
-            //     pathRewrite: { '/get-events': 'topi/v1.0/get-events'}
-            // }
+            '/topi/get-info': {
+                target: 'http://localhost:5104',
+                pathRewrite: { '/topi/get-info': 'topi/v1.0/get-info'}
+            },
+
+            'topi/get-events': {
+                target: 'http://localhost:5104',
+                pathRewrite: { '/get-events': 'topi/v1.0/get-events'}
+            }
 
             
         }

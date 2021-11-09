@@ -8,12 +8,21 @@ const getEvents = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
-    // find all events & return
-    db.collection('events')
-    .find()
-    .toArray(function (err, events) {
-        res.send(events)
+    // grab user id
+    let { id } = req.body
+    console.log(id)
+    db.collection('user')
+    .findOne({ _id: id })
+    .then(user => {
+        return res.status(200).send({events: user.userEvents})
     })
+
+    // find all events & return
+    // db.collection('events')
+    // .find()
+    // .toArray(function (err, events) {
+    //     res.send(events)
+    // })
 }
 
 const createEvent = async (req: Request, res: Response) => {

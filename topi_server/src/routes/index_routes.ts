@@ -26,7 +26,7 @@ export class IndexRoutes extends RoutesBase {
     router.get(`${RoutesBase.API_BASE_URL}/get-info`, userHelper.getInfo)
     router.delete(`${RoutesBase.API_BASE_URL}/delete-event`, userHelper.deleteUser)
 
-    router.get(`${RoutesBase.API_BASE_URL}/get-events`, eventHelper.getEvents)
+    router.post(`${RoutesBase.API_BASE_URL}/get-events`, eventHelper.getEvents)
     router.post(`${RoutesBase.API_BASE_URL}/create-event`, eventHelper.createEvent)
     router.delete(`${RoutesBase.API_BASE_URL}/delete-event/:id`, eventHelper.deleteEvent)
     

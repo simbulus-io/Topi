@@ -2,8 +2,11 @@ import App from './App.vue';
 import router from './router';
 import store from './store/store';
 import Vue from 'vue';
+import VueSimpleAlert from 'vue-simple-alert';
 
 Vue.config.productionTip = false;
+
+Vue.use(VueSimpleAlert);
 
 new Vue({
   router,

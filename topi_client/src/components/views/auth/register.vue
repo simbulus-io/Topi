@@ -59,7 +59,8 @@
 
 
 <script lang="ts">
-
+import Alert from 'vue-simple-alert'
+import Router from '../../../router'
 export default {
     data ()  {
         return {
@@ -90,9 +91,16 @@ export default {
                 })
             })
             .then(res => res.json())
-            .then(this.$router.push('/login'))
+            .then(this.sendAlert())
             .catch(err => err.message)
         },
+
+        sendAlert() {
+            Alert.confirm("Registration Success! ").then(() => {
+                Router.push('/login')
+                
+            })
+        }
 
     }
 }
