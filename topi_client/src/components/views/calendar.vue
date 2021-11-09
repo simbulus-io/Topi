@@ -1,12 +1,11 @@
 <template>
 <div>
-    <h1> Topi Scheduling Page </h1>
+    <h1> {{ title }} </h1>
     <p> 
-        <i>Welcome {{currUser}}</i>
-        <i>Here you can see your upcoming events, as well as create/delete any
-        events as you see fit.</i>
+    <i> Welcome {{ currUser }}</i><br>
+    <i> {{ welcomeMsg }} </i>
     </p>
-
+    
     <div class="row">
         <div class="col">
             <div class="cal">
@@ -37,65 +36,95 @@
 </div>
 </template>
 
-<script>
+<script lang='ts'>
 const URL = 'http://localhost:5104/topi/v1.0/get-events'
-const dURL = 'http://localhost:5104/topi/v1.0/delete-event' 
-const cURL = 'http://localhost:5104/topi/v1.0/create-event'
 import Store from '../../store/store';
 
 export default {
 
     data () {
         return {
-            currUser: Store.state.User,
-            events: [],
-            infoX: '',
-            dateX: '',
+            title: 'Topi Scheduling Page',
+            welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
+            
         }
     },
 
     methods: {
+
+        createEvent() {
+
+        },
+
+        deleteEvent() {
+
+        }
+
+    }
+
+
+}
+
+    // data () {
+    //     return {
+    //         currUser: Store.state.User,
+    //         events: '',
+    //         infoX: '',
+    //         dateX: '',
+    //     }
+    // },
+
+    // methods: {
         
-        getEvents: function() {
-            console.log(Store.state.User)
-            return fetch(URL)
-                .then(res => res.json())
-                .then(result => this.events = result )
-                .catch(err => console.log(err.message))
-        },
+    //     async getUserEvents(): Promise<any> {
+    //         const userEvents = await fetch('/topi/login')
+    //         this.events = userEvents;
+    //     }
 
-        deleteEvent: function (id) {
-            console.log(id)
-            fetch('/topi/delete-event', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                // body: JSON.stringify(id)
-            })
-            .then(this.getEvents())
-            .catch(err => console.log(err.message))
-        },
+    // },
+    // mounted() {
+    // async getEvents () {
+        //     // console.log(Store.state.User)
+        //     // return fetch('topi/get-evnets')
+        //     //     .then(res => res.json())
+        //     //     .then(result => this.events = result )
+        //     //     .catch(err => console.log(err.message))
+        //     try {
+        //         const res = await fetch('/topi/login')
+        //         .then(res => this.events = res);
+        //         if (this.events == null) { console.log('No events :(')}
+        //     } catch (e: any) {
+        //         const err = e as Error
+        //         return err.message
+        //     }
+        // },
 
-        createEvent: function() {
-            const temp = {
-                date: this.dateX,
-                info: this.infoX
-            }
-            fetch('/create-event',  {
-                method: 'POST',
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify(temp),
-            })
-            // .then(this.getEvents())
-            .catch(err => console.log(err.message))
-        },
+        // deleteEvent: function (id) {
+        //     console.log(id)
+        //     fetch('/topi/delete-event', {
+        //         method: 'DELETE',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         // body: JSON.stringify(id)
+        //     })
+        //     .then(this.getEvents())
+        //     .catch(err => console.log(err.message))
+        // },
 
-    },
-    mounted() {
-        this.getEvents()
-    },
-    
+        // createEvent: function() {
+        //     const temp = {
+        //         date: this.dateX,
+        //         info: this.infoX
+        //     }
+        //     fetch('/create-event',  {
+        //         method: 'POST',
+        //         headers: { "Content-Type": "application/json"},
+        //         body: JSON.stringify(temp),
+        //     })
+        //     // .then(this.getEvents())
+        //     .catch(err => console.log(err.message))
+        // },
 
-};
+
 </script>
 
 <style scoped>
@@ -134,7 +163,6 @@ input[type=date]{
 }
 .cal {
     overflow:scroll;
-    
     width: 300px;
     height: 400px;
     border-radius: 20px;
