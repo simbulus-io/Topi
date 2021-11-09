@@ -6,7 +6,7 @@
     </div>
     <div>
 
-        <form id="login-form" v-on:submit='tryLogin' method='get'>
+        <form id="login-form" v-on:submit.prevent='tryLogin'>
             <div class="container">
 
                 <!-- Email Input -->
@@ -70,24 +70,47 @@ export default {
 
             email: '',
             password: '',
+
+            check: false
         }
     },
 
     // Page methods
     methods: {
-        tryLogin(this: any) {
+        async tryLogin(this: any) {
             console.log(this.email)
-            return fetch('/topi/login', {
-                method: 'GET',
+            try {
+            const res=await fetch('/topi/login', {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
                 body: JSON.stringify({
-                    email: this.email,
-                    password: this.password
+                email: this.email,
+                password: this.password
                 })
             })
             .then(res => res.json())
-            .catch(err => err.message)
+            console.log(res)
+            } catch(err) {
+            return err.message
+            }
+        },
+
+        async validate(user: any) {
+            console.log('VALIDATE ?')
+            try {
+                const check = user ? true : false;
+                
+                if (check) { 
+                    console.log('USER-VALID')
+                } else {
+                    console.log('USER-INVALID')
+                    
+                }
+            } catch(err) {
+                return err.message
+            }
+            
         }
     }
 }

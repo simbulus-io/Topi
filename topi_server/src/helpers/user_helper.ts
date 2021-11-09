@@ -1,6 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { last } from 'lodash';
-import { error } from 'winston';
 import { MongoDBs } from '../helpers/mongo_helper';
 
 
@@ -18,12 +16,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     console.log(`[DEBUG] - Password: ${password}`)
 
     // grab user db
-    db.collection('users')
-    .findOne({ email })
+    db.collection('users').findOne({ email })
     .then(user => {
-
-        // debug
-        console.log(`[DEBUG] - User: ${user}`)
 
         // "validate"
         if (user.password === password) {
