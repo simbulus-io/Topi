@@ -2,8 +2,9 @@
   <figure class="half" style="display:flex">
   <table>
     <tr>
+      <img class='img' src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png">
+
       <div class='all'> 
-        <td><img class='img' src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png"></td>
         <div class='meet'>
           <vue-jitsi-meet
             style="display:block;position:absolute;"
@@ -34,7 +35,7 @@ export default {
       return {
         roomName: 'Topi',
         noSSL: false,
-        width:500,
+        width:700,
         height:800,
         userInfo: {
           email: 'user@email.com',
@@ -66,13 +67,14 @@ export default {
 <style scoped>
   
   .img {
+    margin: 0 auto;
     width: 50%;
     padding:0px 10px 30px
   }
   .meet {
     display: inline-block;
     border: 10px outset #04AA6D;
-    width: 500px;
+    width: 700px;
     height:800px;
     position: relative;
     left:-50px
