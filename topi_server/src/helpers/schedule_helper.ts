@@ -49,10 +49,11 @@ const createEvent = async (req: Request, res: Response) => {
     // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
-
+    console.log('test for createEvent()')
     // create new event
     let { date, info } = req.body;
-
+    console.log(date)
+    console.log(info)
     // insert into mongo
     db.collection('events').insertOne({
         date: date,

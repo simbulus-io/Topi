@@ -25,6 +25,22 @@ export class IndexRoutes extends RoutesBase {
     router.post(`${RoutesBase.API_BASE_URL}/login`, userHelper.login)
     router.get(`${RoutesBase.API_BASE_URL}/get-info`, userHelper.getInfo)
     router.delete(`${RoutesBase.API_BASE_URL}/delete-user`, userHelper.deleteUser)
+    router.delete(`${RoutesBase.API_BASE_URL}/delete-user/:id`, (req, res) => {
+      const id = req.params.id;
+      const mongo: MongoDBs = req.app.get('mongo');
+      const db = mongo.topi_db;
+
+      db.collection('users').deleteOne({_id: id})
+      .then(user => {
+        res.status(200).json({
+          msg: 'Successfully deleted user!',
+          dUser: user
+        })
+      })
+      .catch(error => {
+        return res.status(500).json({msg: error.message})
+      });
+    })
 
     router.post(`${RoutesBase.API_BASE_URL}/get-events`, eventHelper.getEvents)
     router.post(`${RoutesBase.API_BASE_URL}/create-event`, eventHelper.createEvent)

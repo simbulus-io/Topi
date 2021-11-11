@@ -15,7 +15,7 @@
                             <p class="event"> {{event.info}} | {{event.date}} | 
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p></b></p>
-                    <p><button type="submit" class="new-meeting">New Meeting</button></p>
+                    <p><button type="submit" class="new-meeting" @click=getEvents>New Meeting</button></p>
                 </div>
             </div>
             
@@ -44,12 +44,13 @@ export default {
             welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
             events:  [],
             infoNew: '',
-            dateNew: '',
+            dateNew: Date,
+            delID: '',
         }
     },
 
     // methods to 
-    // 1. create new events in user's list
+    // 1. create new events in user's list -> DONE
     // 2. delete events from user's list
     // 3. way to grab all events from db
     // 4. create new link method
@@ -60,6 +61,16 @@ export default {
     // 4. where are links going to be stored? or will they be created using method
     methods: {
 
+        async getEvents(this: any): Promise<any> {
+            await fetch('/topi/get-events')
+            .then(res => res.json())
+            .then(userEvents => {
+                // this.events = userEvents
+                return userEvents
+            })
+            .catch(error => console.log(error.message))
+        },
+
         async createEvent(this: any) {
             try {
                 await fetch('/topi/create-event', {
@@ -67,22 +78,31 @@ export default {
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                     body: JSON.stringify({
-                        info: this.infoNew,
                         date: this.dateNew,
+                        info: this.infoNew,
                     })
                 })
             } catch (e: any) {
                 const err = e as Error
                 return err.message
             }
+            
         },
 
         async deleteEvent(this: any) {
-
+            try {
+                await fetch('/topi/delete-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    
+                })
+            } catch (e: any) {
+                const err = e as Error
+                return err.message
+            }
         }
-
-    }
-
+    },
 
 }
 
@@ -120,16 +140,7 @@ export default {
         //     }
         // },
 
-        // deleteEvent: function (id) {
-        //     console.log(id)
-        //     fetch('/topi/delete-event', {
-        //         method: 'DELETE',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         // body: JSON.stringify(id)
-        //     })
-        //     .then(this.getEvents())
-        //     .catch(err => console.log(err.message))
-        // },
+        
 
         // createEvent: function() {
         //     const temp = {
