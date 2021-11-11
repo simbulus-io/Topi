@@ -8,21 +8,40 @@ const getEvents = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
+    // find all events & return
+    db.collection('events')
+    .find()
+    .toArray(function (err, events) {
+        res.send(events)
+    })
+}
+
+const getUserEvents = async (req: Request, res: Response) => {
+
+     // connect to mongo
+     const mongo: MongoDBs = req.app.get('mongo');
+     const db = mongo.topi_db;
+
     // grab user id
     let { id } = req.body
     console.log(id)
     db.collection('user')
-    .findOne({ _id: id })
-    .then(user => {
-        return res.status(200).send({events: user.userEvents})
+    .find({ _id: id })
+    .toArray(function (err, user) {
+        res.send(user)
     })
+}
 
-    // find all events & return
-    // db.collection('events')
-    // .find()
-    // .toArray(function (err, events) {
-    //     res.send(events)
-    // })
+const createUserEvent = async (req: Request, res: Response) => {
+    
+    const mongo: MongoDBs = req.app.get('mongo');
+    const db = mongo.topi_db;
+
+    let { nInfo, nDate } = req.body
+
+    // then off of stored user -> append new event to user current events
+    // vuex ?
+    // update in proxy server
 }
 
 const createEvent = async (req: Request, res: Response) => {
