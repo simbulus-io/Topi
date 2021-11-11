@@ -80,21 +80,33 @@ const getInfo = async (req: Request, res: Response, next: NextFunction) => {
 
 
 // need to delete user
-const deleteUser = (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
 
     // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
-    // find user off of _id & delete
+    // let { _id } = req.body
+
     db.collection('users')
-    .deleteOne({ "id" : req.body.id })
-    .then(user => {
-        return res.status(200).json({ user })
-    })
+    .deleteOne({ _id: req.body })
+    
+    // .then(deleted => {
+    //     return res.status(200)
+    // })
     .catch(error => {
-        return res.status(500).json({ msg: error.message })
+        return res.status(500).json({msg: error.message})
     })
+    // // find user off of _id & delete
+    // db.collection('users')
+    // .find({ id })
+    // .deleteOne({ id })
+    // .then(user => {
+    //     return res.status(200).json({ user })
+    // })
+    // .catch(error => {
+    //     return res.status(500).json({ msg: error.message })
+    // })
 }
 
 export default {
