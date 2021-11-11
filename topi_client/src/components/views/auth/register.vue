@@ -96,7 +96,7 @@ export default {
         },
 
         sendAlert() {
-            Alert.confirm("Registration Success! ").then(() => {
+            Alert.confirm("Registration Success!\n You are being redirected to the login page.").then(() => {
                 Router.push('/login')
                 
             })

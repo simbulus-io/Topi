@@ -2,7 +2,6 @@
 <div>
     <h1> {{ title }} </h1>
     <p> 
-    <i> Welcome {{ currUser }}</i><br>
     <i> {{ welcomeMsg }} </i>
     </p>
     
@@ -15,19 +14,18 @@
                         <b class="media" v-for="event in events" v-bind:key="event._id">
                             <p class="event"> {{event.info}} | {{event.date}} | 
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
-                            </p>
-                        </b>
-                    </p>
-                    <p><button type="submit" class="new-meeting">New Meeting</button></p>
+                            </p></b></p>
+                    <p><button type="submit" class="new-meeting" @click=getEvents>New Meeting</button></p>
                 </div>
             </div>
+            
             <div class="cal">
                 <div class="cal-body">
                     <h1>Add events</h1>
                     <p><label for="info"><b>Information</b></label></p>
-                    <p><input type="info" placeholder="Event Name" v-model="infoX" required></p>
+                    <p><input type="info" placeholder="Event Name" v-model="infoNew" required></p>
                     <p><label for="date"><b>Date</b></label></p>
-                    <p><input type="date" placeholder="Event Date" v-model="dateX" required></p>
+                    <p><input type="date" placeholder="Event Date" v-model="dateNew" required></p>
                     <button class="new-meeting" @click='createEvent'>Add Event</button>
                 </div>
             </div>
@@ -37,8 +35,6 @@
 </template>
 
 <script lang='ts'>
-const URL = 'http://localhost:5104/topi/v1.0/get-events'
-import Store from '../../store/store';
 
 export default {
 
@@ -46,22 +42,67 @@ export default {
         return {
             title: 'Topi Scheduling Page',
             welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
-            
+            events:  [],
+            infoNew: '',
+            dateNew: Date,
+            delID: '',
         }
     },
 
+    // methods to 
+    // 1. create new events in user's list -> DONE
+    // 2. delete events from user's list
+    // 3. way to grab all events from db
+    // 4. create new link method
+    // need to
+    // 1. find way to update page as new events are created/deleted
+    // 2. css styling being funky on page
+    // 3. create links? 
+    // 4. where are links going to be stored? or will they be created using method
     methods: {
 
-        createEvent() {
-
+        async getEvents(this: any): Promise<any> {
+            await fetch('/topi/get-events')
+            .then(res => res.json())
+            .then(userEvents => {
+                // this.events = userEvents
+                return userEvents
+            })
+            .catch(error => console.log(error.message))
         },
 
-        deleteEvent() {
+        async createEvent(this: any) {
+            try {
+                await fetch('/topi/create-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        date: this.dateNew,
+                        info: this.infoNew,
+                    })
+                })
+            } catch (e: any) {
+                const err = e as Error
+                return err.message
+            }
+            
+        },
 
+        async deleteEvent(this: any) {
+            try {
+                await fetch('/topi/delete-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    
+                })
+            } catch (e: any) {
+                const err = e as Error
+                return err.message
+            }
         }
-
-    }
-
+    },
 
 }
 
@@ -99,16 +140,7 @@ export default {
         //     }
         // },
 
-        // deleteEvent: function (id) {
-        //     console.log(id)
-        //     fetch('/topi/delete-event', {
-        //         method: 'DELETE',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         // body: JSON.stringify(id)
-        //     })
-        //     .then(this.getEvents())
-        //     .catch(err => console.log(err.message))
-        // },
+        
 
         // createEvent: function() {
         //     const temp = {
@@ -172,7 +204,7 @@ input[type=date]{
     border: 5px #04AA6D;
     border-style: groove;
     /* display: inline-flex; */
-    white-space: normal;
+    /* white-space: normal; */
 }
 
 /* Info in Section */
