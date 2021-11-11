@@ -2,17 +2,21 @@
   <figure class="half" style="display:flex">
   <table>
     <tr>
-      <td>
-        <img style="height:50vh;width:75%;" src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png">
-      </td>
-      <td>
-         <vue-jitsi-meet
-         style="height:50vh;width:25%;"
-    ref="jitsiRef"
-    domain="meet.jit.si"
-    :options="jitsiOptions"
-  ></vue-jitsi-meet>
-      </td>
+      <div class='all'> 
+        <td><img class='img' src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png"></td>
+        <div class='meet'>
+          <vue-jitsi-meet
+            style="display:block;position:absolute;"
+            ref="jitsiRef"
+            domain="meet.jit.si"
+            :options="jitsiOptions"> 
+          </vue-jitsi-meet>
+        </div>
+        <div class='whiteboard'>
+          <div>WHITEBOARD LETS GO TOPI</div>
+        </div>
+      </div>
+      
     </tr>
   </table>
 </figure>
@@ -30,8 +34,8 @@ export default {
       return {
         roomName: 'Topi',
         noSSL: false,
-        width: 200,
-        height:500,
+        width:500,
+        height:800,
         userInfo: {
           email: 'user@email.com',
           displayName: 'laura',
@@ -58,3 +62,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  
+  .img {
+    width: 50%;
+    padding:0px 10px 30px
+  }
+  .meet {
+    display: inline-block;
+    border: 10px outset #04AA6D;
+    width: 500px;
+    height:800px;
+    position: relative;
+    left:-50px
+  }
+  .whiteboard {
+    border: 10px outset #04AA6D;
+    border-radius: 20px;
+    width: 800px;
+    height:800px;
+    float:left;
+    background-color:white;
+  }
+
+</style>
