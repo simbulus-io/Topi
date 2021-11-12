@@ -58,6 +58,7 @@
 <script lang="ts">
 import Alert from 'vue-simple-alert'
 import Router from '../../../router'
+import Store from '../../../store/store'
 export default {
     // Any page data vars.
     data () {   

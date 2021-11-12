@@ -7,15 +7,16 @@
       <div class='all'> 
         <div class='meet'>
           <vue-jitsi-meet
-            style="display:block;position:absolute;"
             ref="jitsiRef"
             domain="meet.jit.si"
             :options="jitsiOptions"> 
           </vue-jitsi-meet>
         </div>
-        <div class='whiteboard'>
-          <div>WHITEBOARD LETS GO TOPI</div>
-        </div>
+      </div>
+      <div class='whiteboard'>
+        <div class='header'><div>WHITEBOARD LETS GO TOPI
+      </div></div>
+        
       </div>
       
     </tr>
@@ -26,6 +27,7 @@
 <script>
 import { JitsiMeet } from '@mycure/vue-jitsi-meet';
 
+
 export default {
   components: {
     VueJitsiMeet: JitsiMeet
@@ -35,20 +37,22 @@ export default {
       return {
         roomName: 'Topi',
         noSSL: false,
-        width:700,
-        height:800,
+        width:400,
+        height:700,
         userInfo: {
           email: 'user@email.com',
           displayName: 'laura',
           
         },
         configOverwrite: {
-          enableNoisyMicDetection: false
+          enableNoisyMicDetection: false,
+          
         },
         interfaceConfigOverwrite: {
           SHOW_JITSI_WATERMARK: false,
           SHOW_WATERMARK_FOR_GUESTS: false,
-          SHOW_CHROME_EXTENSION_BANNER: false
+          SHOW_CHROME_EXTENSION_BANNER: false,
+          TILE_VIEW_MAX_COLUMNS: 3
         },
         onload: this.onIFrameLoad
       };
@@ -58,8 +62,11 @@ export default {
   methods: {
     onIFrameLoad () {
       this.$refs.jitsiRef.executeCommand('setTileView', true);
-      this.$refs.jitsiRef.executeCommand('displayName', 'The display name');
+      this.$refs.jitsiRef.executeCommand('displayName', 'Ken Fernandez (tutor)');
     },
+    onParticipantJoined(e) {
+      console.log('Someone joined')
+    }
   },
 };
 </script>
@@ -72,20 +79,25 @@ export default {
     padding:0px 10px 30px
   }
   .meet {
-    display: inline-block;
+    /* position:fixed; */
     border: 10px outset #04AA6D;
-    width: 700px;
-    height:800px;
-    position: relative;
-    left:-50px
+    width: 400px;
+    height:700px;
+    float:right;
+    border: 10px outset #04AA6D;
+    border-radius: 20px;
+
+    /* position: absolute; */
+    /* left:1300px */
+    
   }
   .whiteboard {
     border: 10px outset #04AA6D;
-    border-radius: 20px;
-    width: 800px;
-    height:800px;
-    float:left;
     background-color:white;
+    border-radius: 20px;
+    float:right;
+    width: 700px;
+    height:700px;
   }
 
 </style>

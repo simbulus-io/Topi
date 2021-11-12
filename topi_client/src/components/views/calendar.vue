@@ -15,6 +15,7 @@
                             <p class="event"> {{event.info}} | {{event.date}} | 
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p></b></p>
+                        <div><i>No new events...</i></div>
                     <p><button type="submit" class="new-meeting" @click=getEvents>New Meeting</button></p>
                 </div>
             </div>

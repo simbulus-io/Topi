@@ -93,7 +93,7 @@ export default {
     fileRecordingsEnabled: true,
     fileRecordingsServiceEnabled: false,
     fileRecordingsServiceSharingEnabled: false,
-    requireDisplayName: false,
+    requireDisplayName: true,
     enableWelcomePage: true,
     isBrand: false,
     dialInNumbersUrl: 'https://api.jitsi.net/phoneNumberList',
