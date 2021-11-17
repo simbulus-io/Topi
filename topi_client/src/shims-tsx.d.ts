@@ -11,3 +11,7 @@ declare global {
     }
   }
 }
+
+export interface Module<S, R> {
+  state?: S | (() => S);
+}

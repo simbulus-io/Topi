@@ -3,6 +3,7 @@
     <div class="title">
         <h1> {{ Welcome }} </h1>
         <p><i>Welcome back!</i></p>
+
     </div>
     <div>
 
@@ -59,6 +60,7 @@
 import Alert from 'vue-simple-alert'
 import Router from '../../../router'
 import Store from '../../../store/store'
+
 export default {
     // Any page data vars.
     data () {   
@@ -75,6 +77,11 @@ export default {
             check: false
         }
     },
+
+    computed: {
+        
+    },
+
     methods: {
         async tryLogin(this: any) {
             try {

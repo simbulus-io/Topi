@@ -23,6 +23,7 @@ const default_state: TopiState = {
 export const avtest: Module<TopiState, RootState> = {
   namespaced,
   // This is the default state
+  // state: default_state,
   state: default_state,
   getters: {
   },
@@ -33,3 +34,4 @@ export const avtest: Module<TopiState, RootState> = {
   actions: {
   },
 };
+

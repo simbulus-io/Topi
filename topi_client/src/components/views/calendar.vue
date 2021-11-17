@@ -1,6 +1,7 @@
 <template>
 <div>
     <h1> {{ title }} </h1>
+    <h2> {{ name }} </h2>
     <p> 
     <i> {{ welcomeMsg }} </i>
     </p>
@@ -36,6 +37,7 @@
 </template>
 
 <script lang='ts'>
+import Store from '../../store/store';
 
 export default {
 
@@ -49,6 +51,14 @@ export default {
             delID: '',
         }
     },
+
+    // computed: {
+    //     userInfo: {
+    //         get (): string {
+    //             return this.$store.state.user.username
+    //         },
+    //     }
+    // },
 
     // methods to 
     // 1. create new events in user's list -> DONE
