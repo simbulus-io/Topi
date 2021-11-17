@@ -25,6 +25,8 @@ const getUserEvents = async (req: Request, res: Response) => {
     // grab user id
     let { id } = req.body
     console.log(id)
+
+    // find user's events and return 
     db.collection('user')
     .find({ _id: id })
     .toArray(function (err, user) {

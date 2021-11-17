@@ -57,12 +57,12 @@
 
 
 <script lang="ts">
-import Alert from 'vue-simple-alert'
-import Router from '../../../router'
-import Store from '../../../store/store'
+import Alert from 'vue-simple-alert';
+import Router from '../../../router';
+import Store from '../../../store/store';
+import Vue from 'vue';
 
-export default {
-    // Any page data vars.
+export default Vue.extend({
     data () {   
         return {
             Welcome: 'Topi Login Page',
@@ -70,7 +70,6 @@ export default {
             Mines: 'About Mines Field Session Group Topi',
             Forgot: 'Forgot Password?',
             Home: 'Back Home?',
-
             email: '',
             password: '',
 
@@ -78,9 +77,6 @@ export default {
         }
     },
 
-    computed: {
-        
-    },
 
     methods: {
         async tryLogin(this: any) {
@@ -96,6 +92,8 @@ export default {
             })
             .then(res => {
                 this.validate(res)
+                this.$store.state.user.email = this.email
+            }).then(none => {
                 this.email = '',
                 this.password = ''
             })
@@ -113,7 +111,6 @@ export default {
                     Alert.confirm("Login Success!").then(() => {
                         Router.push('/calendar')
                     })
-                // TODO : store user using vuex? (persist for cal)
                 } else {
                     Alert.alert("Invalid login, try again please!")
                     console.log("Status 403: Incorrect information (login)")
@@ -124,7 +121,7 @@ export default {
             }
         }
     }
-}
+})
 </script>
 <style scoped>
 

@@ -41,6 +41,11 @@ const routes: Array<RouteConfig> = [
     name: 'Registration',
     component: () => import ('./components/views/auth/register.vue'),
   },
+  {
+    path: '/meeting',
+    name: 'Meeting',
+    component: () => import ('./components/views/meeting.vue'),
+  },
 ];
 
 const router = new VueRouter({

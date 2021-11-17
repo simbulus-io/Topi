@@ -1,11 +1,10 @@
 <template>
 <div>
     <h1> {{ title }} </h1>
-    <h2> {{ name }} </h2>
+    <h2> Hello, {{ name }} </h2>
     <p> 
     <i> {{ welcomeMsg }} </i>
     </p>
-    
     <div class="row">
         <div class="col">
             <div class="cal">
@@ -17,7 +16,7 @@
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p></b></p>
                         <div><i>No new events...</i></div>
-                    <p><button type="submit" class="new-meeting" @click=getEvents>New Meeting</button></p>
+                    <p><button type="submit" class="new-meeting" @click=toMeeting>New Meeting</button></p>
                 </div>
             </div>
             
@@ -38,39 +37,28 @@
 
 <script lang='ts'>
 import Store from '../../store/store';
+import AboutMines from '../about_mines'
+import Router from '../../router'
+import Vue from 'vue'
 
-export default {
+export default Vue.extend({
 
     data () {
         return {
+            name: this.$store.state.user.email,
+            events: this.$store.state.user.events,
             title: 'Topi Scheduling Page',
             welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
-            events:  [],
             infoNew: '',
             dateNew: Date,
             delID: '',
         }
     },
 
-    // computed: {
-    //     userInfo: {
-    //         get (): string {
-    //             return this.$store.state.user.username
-    //         },
-    //     }
-    // },
-
-    // methods to 
-    // 1. create new events in user's list -> DONE
-    // 2. delete events from user's list
-    // 3. way to grab all events from db
-    // 4. create new link method
-    // need to
-    // 1. find way to update page as new events are created/deleted
-    // 2. css styling being funky on page
-    // 3. create links? 
-    // 4. where are links going to be stored? or will they be created using method
     methods: {
+        async toMeeting() {
+            Router.push(`/meeting`)
+        },
 
         async getEvents(this: any): Promise<any> {
             await fetch('/topi/get-events')
@@ -115,57 +103,7 @@ export default {
         }
     },
 
-}
-
-    // data () {
-    //     return {
-    //         currUser: Store.state.User,
-    //         events: '',
-    //         infoX: '',
-    //         dateX: '',
-    //     }
-    // },
-
-    // methods: {
-        
-    //     async getUserEvents(): Promise<any> {
-    //         const userEvents = await fetch('/topi/login')
-    //         this.events = userEvents;
-    //     }
-
-    // },
-    // mounted() {
-    // async getEvents () {
-        //     // console.log(Store.state.User)
-        //     // return fetch('topi/get-evnets')
-        //     //     .then(res => res.json())
-        //     //     .then(result => this.events = result )
-        //     //     .catch(err => console.log(err.message))
-        //     try {
-        //         const res = await fetch('/topi/login')
-        //         .then(res => this.events = res);
-        //         if (this.events == null) { console.log('No events :(')}
-        //     } catch (e: any) {
-        //         const err = e as Error
-        //         return err.message
-        //     }
-        // },
-
-        
-
-        // createEvent: function() {
-        //     const temp = {
-        //         date: this.dateX,
-        //         info: this.infoX
-        //     }
-        //     fetch('/create-event',  {
-        //         method: 'POST',
-        //         headers: { "Content-Type": "application/json"},
-        //         body: JSON.stringify(temp),
-        //     })
-        //     // .then(this.getEvents())
-        //     .catch(err => console.log(err.message))
-        // },
+})
 
 
 </script>

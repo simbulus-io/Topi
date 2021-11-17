@@ -7,7 +7,7 @@ import { GetterTree, MutationTree } from 'vuex';
 Vue.use(Vuex);
 
 export const state: User = {
-  username: 'Kenny',
+  username: 'KennyUser',
   email: 'mail.com',
   uid: '100',
   loggedIn: false,
@@ -15,23 +15,23 @@ export const state: User = {
 };
 
 export const getters: GetterTree<User, RootState> = {
-  getUsername (user): string {
-    return user.username;
+  getUsername (): string {
+    return state.username;
   },
-  getUserEvents (user): Array<Object> {
-    return user.events;
+  getUserEvents (): Array<Object> {
+    return state.events;
   },
-  getUserID (user): string {
-    return user.uid;
+  getUserID (): string {
+    return state.uid;
   },
 };
 
 export const mutations: MutationTree<User> = {
-  setUsername (user, payload: string) {
-    user.username = payload;
+  setUsername (state, payload: string) {
+    state.username = payload;
   },
-  setUserEmail (user, payload: string) {
-    user.email = payload;
+  setUserEmail (state, payload: string) {
+    state.email = payload;
   },
 };
 
