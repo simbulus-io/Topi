@@ -53,7 +53,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
         lastName: lastName,
         email: email,
         password: password,
-        userEvents: events,
+        userEvents: [],
     }, function (
         error,
         users,
@@ -86,27 +86,32 @@ const deleteUser = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
-    // let { _id } = req.body
-
+    // let { _id } = req.body\
     db.collection('users')
-    .deleteOne({ _id: req.body })
-    
-    // .then(deleted => {
-    //     return res.status(200)
-    // })
-    .catch(error => {
-        return res.status(500).json({msg: error.message})
+    .findOneAndDelete({})
+    .then(res => {
+        return res
     })
-    // // find user off of _id & delete
+
+
     // db.collection('users')
-    // .find({ id })
-    // .deleteOne({ id })
-    // .then(user => {
-    //     return res.status(200).json({ user })
+    // .deleteMany({ _id: req.body })
+    // .then(res => {
+    //     return res
     // })
     // .catch(error => {
-    //     return res.status(500).json({ msg: error.message })
+    //     return res.status(500).json({msg: error.message})
     // })
+    // // // find user off of _id & delete
+    // // db.collection('users')
+    // // .find({ id })
+    // // .deleteOne({ id })
+    // // .then(user => {
+    // //     return res.status(200).json({ user })
+    // // })
+    // // .catch(error => {
+    // //     return res.status(500).json({ msg: error.message })
+    // // })
 }
 
 export default {

@@ -23,15 +23,21 @@ const getUserEvents = async (req: Request, res: Response) => {
      const db = mongo.topi_db;
 
     // grab user id
-    let { id } = req.body
-    console.log(id)
+    let { email } = req.body
 
     // find user's events and return 
-    db.collection('user')
-    .find({ _id: id })
-    .toArray(function (err, user) {
-        res.send(user)
+    db.collection('users')
+    .findOne({ email })
+    .then(user => {
+        return res.json({user: user})
+        return res.json({ events: user.userEvents })
     })
+    .catch(error => {
+        return res.json({error: error.message})
+    })
+    // .toArray(function (err, user) {
+    //     res.send(user)
+    // })
 }
 
 const createUserEvent = async (req: Request, res: Response) => {
@@ -39,7 +45,28 @@ const createUserEvent = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
-    let { nInfo, nDate } = req.body
+    let { email, date, info } = req.body
+    var tempList: any[] = []
+    db.collection('users')
+    .findOne({ email })
+    .then(user => {
+        // return res.json({user: user})
+        tempList = user.userEvents.push({
+            date: date,
+            info: info
+        })
+        
+    }) 
+    .catch(error => {
+        return res.json({error: error.message})
+    })
+
+    db.collection('users')
+    .updateOne({ email }, {userEvents: tempList})
+    .catch(error => {
+        return res.json({error: error.message})
+    
+    })
 
     // then off of stored user -> append new event to user current events
     // vuex ?
@@ -87,4 +114,6 @@ export default {
     getEvents,
     createEvent,
     deleteEvent,
+    getUserEvents,
+    createUserEvent,
 }

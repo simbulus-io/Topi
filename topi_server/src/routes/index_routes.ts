@@ -44,6 +44,8 @@ export class IndexRoutes extends RoutesBase {
 
     router.post(`${RoutesBase.API_BASE_URL}/get-events`, eventHelper.getEvents)
     router.post(`${RoutesBase.API_BASE_URL}/create-event`, eventHelper.createEvent)
+    router.post(`${RoutesBase.API_BASE_URL}/getuserevents`, eventHelper.getUserEvents)
+    router.post(`${RoutesBase.API_BASE_URL}/createuserevent`, eventHelper.createUserEvent)
     router.delete(`${RoutesBase.API_BASE_URL}/delete-event/:id`, eventHelper.deleteEvent)
     
     router.get('/foo', (req: Request, res: Response) => {
