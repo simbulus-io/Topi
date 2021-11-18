@@ -27,7 +27,7 @@ module.exports = {
 
             '/topi/create-event': {
                 target: 'http://localhost:5104',
-                pathRewrite: { '/topi/create-event': '/topi/v1.0/createuserevent'}
+                pathRewrite: { '/topi/create-event': '/topi/v1.0/create-event'}
             },
 
             '/topi/delete-event': {

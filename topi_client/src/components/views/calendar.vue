@@ -2,9 +2,16 @@
 <div>
     <h1> {{ title }} </h1>
     <h2> Hello, {{ name }} </h2>
-    <p> 
-    <i> {{ welcomeMsg }} </i>
-    </p>
+    <p><i> {{ welcomeMsg }} </i></p>
+    <newMeetingBox v-if='showModal == true' class='modal'>
+        <div class='info'>
+            <h1>Create Meeting</h1>
+                <p><label><b>Information</b></label></p>
+                <p><input placeholder="Meeting Info." required></p>
+                <button 
+                @click='showModal = false' v-on:click='toMeeting'>Create Meeting</button>
+        </div>
+    </newMeetingBox>
     <div class="row">
         <div class="col">
             <div class="cal">
@@ -16,10 +23,9 @@
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p></b></p>
                         <div><i>No new events...</i></div>
-                    <p><button type="submit" class="new-meeting" @click=toMeeting>New Meeting</button></p>
+                    <p><button id="show-modal" @click='showModal = true'>New Meeting</button></p>
                 </div>
             </div>
-            
             <div class="cal">
                 <div class="cal-body">
                     <h1>Add events</h1>
@@ -27,7 +33,7 @@
                     <p><input type="info" placeholder="Event Name" v-model="infoNew" required></p>
                     <p><label for="date"><b>Date</b></label></p>
                     <p><input type="date" placeholder="Event Date" v-model="dateNew" required></p>
-                    <button class="new-meeting" @click='createEvent'>Add Event</button>
+                    <button @click='createEvent'>Add Event</button>
                 </div>
             </div>
         </div>
@@ -36,15 +42,13 @@
 </template>
 
 <script lang='ts'>
-import Store from '../../store/store';
-import AboutMines from '../about_mines'
 import Router from '../../router'
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.extend({
-
     data () {
         return {
+            showModal: false,
             name: this.$store.state.user.email,
             events: this.$store.state.user.events,
             title: 'Topi Scheduling Page',
@@ -54,22 +58,18 @@ export default Vue.extend({
             delID: '',
         }
     },
-
     methods: {
         async toMeeting() {
             Router.push(`/meeting`)
         },
-
         async getEvents(this: any): Promise<any> {
             await fetch('/topi/get-events')
             .then(res => res.json())
             .then(userEvents => {
-                // this.events = userEvents
                 return userEvents
             })
             .catch(error => console.log(error.message))
         },
-
         async createEvent(this: any) {
             try {
                 await fetch('/topi/create-event', {
@@ -85,7 +85,6 @@ export default Vue.extend({
                 const err = e as Error
                 return err.message
             }
-            
         },
 
         async deleteEvent(this: any) {
@@ -94,7 +93,6 @@ export default Vue.extend({
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
-                    
                 })
             } catch (e: any) {
                 const err = e as Error
@@ -102,13 +100,12 @@ export default Vue.extend({
             }
         }
     },
-
 })
-
-
 </script>
-
 <style scoped>
+.modal {
+    border: 10px black outset;
+}
 input[type=info] {
     width: 90%;
     padding: 20px 10px ;

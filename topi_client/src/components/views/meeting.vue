@@ -1,30 +1,18 @@
 <template>
   <figure class="half" style="display:flex">
-  <table>
-    <!-- <tr> -->
-      <img class='img' src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png">
-
       <div class='all'> 
-        <div class='meet'>
-          <vue-jitsi-meet
-            ref="jitsiRef"
-            domain="meet.jit.si"
-            :options="jitsiOptions"> 
-          </vue-jitsi-meet>
-        </div>
 
         <div class='whiteboard'>
-        <div class='header'><div>WHITEBOARD LETS GO TOPI
-      </div></div>
-        
-      </div>
+            <div class='meet'>
+              <vue-jitsi-meet
+                ref="jitsiRef"
+                domain="meet.jit.si"
+                :options="jitsiOptions"> 
+              </vue-jitsi-meet>
+            </div>
+        </div>
 
-
       </div>
-      
-      
-    <!-- </tr> -->
-  </table>
 </figure>
 </template>
 
@@ -41,17 +29,15 @@ export default Vue.extend({
       return {
         roomName: 'Topi',
         noSSL: false,
-        width:400,
+        width: 355,
         height:700,
         parentNode: document.querySelector('meet'),
         userInfo: {
           email: '',
           displayName: '',
-          
         },
         configOverwrite: {
           enableNoisyMicDetection: false,
-          
         },
         interfaceConfigOverwrite: {
           SHOW_JITSI_WATERMARK: false,
@@ -77,32 +63,22 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-  
-  .img {
-    margin: 0 auto;
-    width: 50%;
-    padding:0px 10px 30px
+  .all {
+    width: 100%;
+    min-height:100%;
   }
   .meet {
-    /* position:fixed; */
-    border: 10px outset #04AA6D;
-    width: 400px;
-    height:700px;
+    width: 30%;
+    height:95%;
     float:right;
-    border: 10px outset #04AA6D;
-    border-radius: 20px;
-
-    /* position: absolute; */
-    /* left:1300px */
-    
+    border: 10px green outset;
   }
   .whiteboard {
     border: 10px outset #04AA6D;
     background-color:white;
     border-radius: 20px;
-    float:right;
-    width: 700px;
-    height:700px;
+    width: 100%;
+    height: 100%;
   }
 
 </style>
