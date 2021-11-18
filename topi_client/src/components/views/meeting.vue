@@ -1,7 +1,6 @@
 <template>
   <figure class="half" style="display:flex">
       <div class='all'> 
-
         <div class='whiteboard'>
             <div class='meet'>
               <vue-jitsi-meet
@@ -11,7 +10,6 @@
               </vue-jitsi-meet>
             </div>
         </div>
-
       </div>
 </figure>
 </template>
@@ -27,10 +25,10 @@ export default Vue.extend({
   computed: {
     jitsiOptions () {
       return {
-        roomName: 'Topi',
+        roomName: this.$store.state.meetingId,
         noSSL: false,
-        width: 355,
-        height:700,
+        // width: 355,
+        // height:700,
         parentNode: document.querySelector('meet'),
         userInfo: {
           email: '',
@@ -43,7 +41,7 @@ export default Vue.extend({
           SHOW_JITSI_WATERMARK: false,
           SHOW_WATERMARK_FOR_GUESTS: false,
           SHOW_CHROME_EXTENSION_BANNER: false,
-          TILE_VIEW_MAX_COLUMNS: 3
+          TILE_VIEW_MAX_COLUMNS: 1
         },
         onload: this.onIFrameLoad
       };
@@ -65,11 +63,12 @@ export default Vue.extend({
 <style scoped>
   .all {
     width: 100%;
+    /* height: 100%; */
     min-height:100%;
   }
   .meet {
     width: 30%;
-    height:95%;
+    height:800px;
     float:right;
     border: 10px green outset;
   }

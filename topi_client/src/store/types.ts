@@ -1,6 +1,7 @@
 export interface RootState {
   version: string;
   name: any;
+  meetingId: string;
 }
 
 export interface User {

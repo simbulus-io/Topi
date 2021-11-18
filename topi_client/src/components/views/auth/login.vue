@@ -3,10 +3,8 @@
     <div class="title">
         <h1> {{ Welcome }} </h1>
         <p><i>Welcome back!</i></p>
-
     </div>
     <div>
-
         <form id="login-form" v-on:submit.prevent='tryLogin'>
             <div class="container">
 
@@ -86,8 +84,8 @@ export default Vue.extend({
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
                 body: JSON.stringify({
-                email: this.email,
-                password: this.password
+                    email: this.email,
+                    password: this.password
                 })
             })
             .then(res => {
@@ -103,7 +101,6 @@ export default Vue.extend({
             }
         },
         async validate(check: any) {
-            console.log('Validating')
             try {
                 const rt = (check.status == 200) ? true : false
                 if (rt) {

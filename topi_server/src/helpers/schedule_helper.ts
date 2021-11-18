@@ -26,10 +26,10 @@ const getUserEvents = async (req: Request, res: Response) => {
     let { email } = req.body
 
     // find user's events and return (TODO)
-    db.collection('users')
+    db.collection('events')
     .findOne({ email })
     .then(user => {
-        return res.json({user: user})
+        // return res.json({user: user})
         return res.json({ events: user.userEvents })
     })
     .catch(error => {
@@ -39,19 +39,27 @@ const getUserEvents = async (req: Request, res: Response) => {
 
 const createUserEvent = async (req: Request, res: Response) => {
     
+    // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
+    // take data from request
     let { email, date, info } = req.body
     const update = {
+        email: email,
         date: date,
         info: info,
     }
 
-    // TODO 
-    db.collection('users')
-    .find({ email })
+    // TODO - insert new event/meeting into user's info.
+    db.collection('events')
+    .insertOne({ update })
+    .catch(error => {
+        return res.json({ error: error.message })
+    })
+
 }
+
 
 const createEvent = async (req: Request, res: Response) => {
 
@@ -59,10 +67,10 @@ const createEvent = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
     console.log('test for createEvent()')
+
     // create new event
     let { date, info } = req.body;
-    console.log(date)
-    console.log(info)
+
     // insert into mongo
     db.collection('events').insertOne({
         date: date,
@@ -82,12 +90,16 @@ const deleteEvent = async (req: Request, res: Response) => {
     const db = mongo.topi_db;
 
     // delete event corresponding to _id
-    console.log(req.body.id)
-    db.collection('events').deleteOne({ '_id': req.body.id })
-    
-    .catch(error => {
-        return res.status(500).json({ msg: error.message })
+    let id = req.body.id
+    console.log(`TEST: ${id}`)
+    db.collection('events')
+    .deleteOne({
+        _id: id
     })
+    .catch(error => {
+        return { error: error.message }
+    })
+    res.send({ "Message" : "Possibly deleted one" })
 }
 
 export default {

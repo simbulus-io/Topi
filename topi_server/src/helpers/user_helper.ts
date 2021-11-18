@@ -46,7 +46,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
     // grab new user info.
     let { firstName, lastName, email, password } = req.body;
-    var events:[]
+    
     // insert user into db
     db.collection('users').insertOne({
         firstName: firstName,
@@ -86,7 +86,8 @@ const deleteUser = async (req: Request, res: Response) => {
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
 
-    // let { _id } = req.body\
+    // let { _id } = req.body
+    // For some reason - having issues with deleting users based on _id filter
     db.collection('users')
     .findOneAndDelete({})
     .then(res => {

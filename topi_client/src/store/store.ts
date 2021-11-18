@@ -10,6 +10,7 @@ const store: StoreOptions<RootState> = {
   state: {
     version: 'v1.0',
     name: 'Kenny',
+    meetingId: '101010101010',
   },
 
   modules: {

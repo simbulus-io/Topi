@@ -7,9 +7,11 @@
         <div class='info'>
             <h1>Create Meeting</h1>
                 <p><label><b>Information</b></label></p>
-                <p><input placeholder="Meeting Info." required></p>
+                <p><input placeholder="Meeting Title" v-model='meetInfo' required></p>
                 <button 
-                @click='showModal = false' v-on:click='toMeeting'>Create Meeting</button>
+                @click='showModal = false' 
+                    v-on:click='toMeeting'>
+                    Create Meeting</button>
         </div>
     </newMeetingBox>
     <div class="row">
@@ -56,10 +58,12 @@ export default Vue.extend({
             infoNew: '',
             dateNew: Date,
             delID: '',
+            meetInfo: '',
         }
     },
     methods: {
         async toMeeting() {
+            this.$store.state.meetingId = this.meetInfo
             Router.push(`/meeting`)
         },
         async getEvents(this: any): Promise<any> {
