@@ -45,6 +45,7 @@ const createUserEvent = async (req: Request, res: Response) => {
 
     // take data from request
     let { email, date, info } = req.body
+    console.log(email, date, info)
     const update = {
         email: email,
         date: date,
@@ -62,7 +63,7 @@ const createUserEvent = async (req: Request, res: Response) => {
 
 
 const createEvent = async (req: Request, res: Response) => {
-
+    console.log("here")
     // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;

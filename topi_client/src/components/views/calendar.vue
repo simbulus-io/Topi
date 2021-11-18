@@ -1,17 +1,25 @@
 <template>
-<div>
+<div class = 'modal-backdrop'>
     <h1> {{ title }} </h1>
     <h2> Hello, {{ name }} </h2>
     <p><i> {{ welcomeMsg }} </i></p>
     <newMeetingBox v-if='showModal == true' class='modal'>
-        <div class='info'>
+        <div class='modal'>
             <h1>Create Meeting</h1>
                 <p><label><b>Information</b></label></p>
-                <p><input placeholder="Meeting Title" v-model='meetInfo' required></p>
+                <div class='inputTitle'>
+                    <p><input placeholder="Meeting Title" v-model='meetInfo' required></p>
+                </div>
+                <div class='createMeetButton'>
+                    <button 
+                    @click='showModal = false' 
+                        v-on:click='toMeeting'>
+                        Create Meeting</button>
+                </div><div class='closeButton'>
                 <button 
-                @click='showModal = false' 
-                    v-on:click='toMeeting'>
-                    Create Meeting</button>
+                    @click='showModal = false' >
+                    Close</button>
+                </div>
         </div>
     </newMeetingBox>
     <div class="row">
@@ -42,6 +50,8 @@
     </div>
 </div>
 </template>
+
+
 
 <script lang='ts'>
 import Router from '../../router'
@@ -109,7 +119,19 @@ export default Vue.extend({
 <style scoped>
 .modal {
     border: 10px black outset;
+    background: #fdfdfd;
+    width: 500px;
+    height: 300px;
+    box-shadow: 2px 2px 20px 1px;
+    overflow-x: auto;
+    display: inline-flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 input[type=info] {
     width: 90%;
     padding: 20px 10px ;
@@ -135,6 +157,7 @@ input[type=date]{
     color: black; 
     cursor: pointer;
 }
+
 .row {
     display: inline-flex;
     margin: 10px;
@@ -156,7 +179,6 @@ input[type=date]{
     /* display: inline-flex; */
     /* white-space: normal; */
 }
-
 /* Info in Section */
 .event {
     margin: 10px;
