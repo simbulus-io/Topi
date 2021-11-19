@@ -9,25 +9,26 @@
         <div class='modal'>
             <h1>Create Meeting</h1>
                 <div class='inputTitle'>
-                    <p><label><b>Meeting name?</b></label>
-                    <input placeholder="Meeting name?" 
+                    <p><label style='font-size:20px;'><b>Meeting-ID:    </b></label>
+                    <input placeholder="..." 
                             v-model='meetInfo' 
                             required
-                            style='margin:5px;'></p>
-                    <p><label><b>Information</b></label>
-                    <input placeholder="Meeting info?" 
+                            style='margin:0px 0px 0px 5px; padding:5px'></p>
+                    <p><label style='font-size:20px;'><b>Information:</b></label>
+                    <input placeholder="..." 
                             v-model='meetInfo' 
                             required
-                            style='margin:10px;'></p>
+                            style='margin:0px 0px 0px 5px; padding:5px'></p>
                     <!-- Button -->
                     <div class='createMeetButton'>
                         <button 
                             @click='showModal = false' 
                             v-on:click='toMeeting'
-                            style='margin:10px;'>
+                            style='margin:5px;'>
                             Create Meeting</button></div>
                     <div class='closeButton'>
                         <button 
+                            style='margin:5px;'
                             @click='showModal = false' >
                             Close</button></div>
                 </div>
@@ -90,7 +91,7 @@ export default Vue.extend({
             dateNew: Date,
             delID: '',
             meetInfo: '',
-            userList: ['Kenny', 'Laura', 'Adam', 'Dillon'],
+            userList: ['Laura', 'Adam', 'Dillon'],
         }
     },
     methods: {
@@ -151,8 +152,6 @@ export default Vue.extend({
     max-width: 100px;
     margin: 10px;
     border: 3px #04AA6D solid;
-    text-align: center;
-    content: center;
     background-color: aliceblue;
 }
 .dropContent {
@@ -175,15 +174,17 @@ export default Vue.extend({
     display:block;
 }
 .inputTitle{
+    padding: 10px 30px;
+    text-align: left;
     display:inline-block;
 }
 
 .modal {
     padding: 10px;
-    border: 5px #04AA6D outset;
+    border: 5px lightseagreen outset;
     background: beige;
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 400px;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: inline-flex;
