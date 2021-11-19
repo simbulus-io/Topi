@@ -37,6 +37,9 @@ const getUserEvents = async (req: Request, res: Response) => {
     })
 }
 
+
+// TODO - Need to be able to grab some sort of info. that links a DB doc. to a 
+// user, then insert a new event into their userEvent array
 const createUserEvent = async (req: Request, res: Response) => {
     
     // connect to mongo
@@ -84,6 +87,10 @@ const createEvent = async (req: Request, res: Response) => {
     })
 }
 
+// TODO - need to be able to delete events by either getting the
+// id of the event or by finding the user then finding the event.
+// ISSUE - id is passed to here (as seen byconsole.log) but won't
+// delete an event 
 const deleteEvent = async (req: Request, res: Response) => {
 
     // connect to mongo
