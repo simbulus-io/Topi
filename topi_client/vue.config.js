@@ -44,6 +44,11 @@ module.exports = {
                 target: 'http://localhost:5104',
                 pathRewrite: { '/get-events': '/topi/v1.0/get-events'}
             },
+
+            '/topi/get-info': {
+                target: 'http://localhost:5104',
+                pathRewrite: { '/get-info': '/topi/v1.0/get-info'}
+            },
         }
     }
 }

@@ -3,25 +3,40 @@
     <h1> {{ title }} </h1>
     <h2> Hello, {{ name }} </h2>
     <p><i> {{ welcomeMsg }} </i></p>
+
+    <!-- Modal -->
     <newMeetingBox v-if='showModal == true' class='modal'>
         <div class='modal'>
             <h1>Create Meeting</h1>
-                <p><label><b>Information</b></label></p>
                 <div class='inputTitle'>
+                <p><label><b>Information</b></label></p>
                     <p><input placeholder="Meeting Title" v-model='meetInfo' required></p>
-                </div>
+                <!-- Button -->
                 <div class='createMeetButton'>
                     <button 
-                    @click='showModal = false' 
-                        v-on:click='toMeeting'>
-                        Create Meeting</button>
-                </div><div class='closeButton'>
-                <button 
+                        @click='showModal = false' 
+                        v-on:click='toMeeting'
+                        style='margin:10px;'>
+                        
+                        Create Meeting</button></div>
+                <div class='closeButton'>
+                    <button 
                     @click='showModal = false' >
-                    Close</button>
+                    Close</button></div>
+        </div>
+            <!-- Dropdown -->
+            <div class="dropdown">
+                <div>Add a student?</div>
+                <div class="dropContent" 
+                    v-for='user in userList' 
+                    v-bind:key='user'>
+                    <p>{{user}}</p>
                 </div>
+            </div>
         </div>
     </newMeetingBox>
+
+    <!-- User Calendar  -->
     <div class="row">
         <div class="col">
             <div class="cal">
@@ -69,9 +84,17 @@ export default Vue.extend({
             dateNew: Date,
             delID: '',
             meetInfo: '',
+            userList: ['Kenny', 'Laura', 'Adam', 'Dillon'],
         }
     },
     methods: {
+        async grabUserList() {
+            await fetch('/topi/get-info')
+            .then(res => this.userList)
+            console.log(this.userList)
+        },
+
+
         async toMeeting() {
             this.$store.state.meetingId = this.meetInfo
             Router.push(`/meeting`)
@@ -117,9 +140,38 @@ export default Vue.extend({
 })
 </script>
 <style scoped>
+.dropdown {
+    display:block;
+    max-width: 100px;
+    margin: 10px;
+    border: 3px #04AA6D solid;
+    text-align: center;
+    content: center;
+}
+.dropContent {
+    display: none;
+    font-size: 25px;
+    min-width: 70px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin:0px;
+    padding:0px;
+    background-color: #04AA6D;
+}
+.dropContent:hover {
+    background-color: #04AA6D;
+}
+.dropdown:hover .dropContent {
+    background-color: #04AA6D;
+    display:block;
+}
+.inputTitle{
+    display:inline-block;
+}
+
 .modal {
-    border: 10px black outset;
-    background: #fdfdfd;
+    padding: 10px;
+    border: 5px #04AA6D outset;
+    background: beige;
     width: 500px;
     height: 300px;
     box-shadow: 2px 2px 20px 1px;
@@ -135,7 +187,6 @@ export default Vue.extend({
 input[type=info] {
     width: 90%;
     padding: 20px 10px ;
-    /* margin: 20px 0; */
     display:table-column;
     border: 5px solid #ccc;
     box-sizing: border-box;
