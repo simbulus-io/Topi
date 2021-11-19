@@ -7,7 +7,8 @@
     <!-- Modal -->
     <newMeetingBox v-if='showModal == true' class='modal'>
         <div class='modal'>
-            <h1>Create Meeting</h1>
+            <h1 style='padding:10px; margin:0px 0px;'>Create Meeting</h1>
+                <p><i>Enter information about the meeting you would like to create...</i></p>
                 <div class='inputTitle'>
                     <p><label style='font-size:20px;'><b>Meeting-ID:    </b></label>
                     <input placeholder="..." 
@@ -150,7 +151,8 @@ export default Vue.extend({
 .dropdown {
     display:block;
     max-width: 100px;
-    margin: 10px;
+    margin: 0px 0px 0px 30px;
+    padding: 5px;
     border: 3px #04AA6D solid;
     background-color: aliceblue;
 }
