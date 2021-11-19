@@ -32,6 +32,7 @@
   }
 }
 body {
-  background-color: #ECE7B4
+  // background-color: #ECE7B4
+  background: linear-gradient(lightgreen, salmon);
 }
 </style>

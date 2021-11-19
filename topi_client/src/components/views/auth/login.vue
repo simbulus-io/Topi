@@ -1,8 +1,11 @@
 <template>
 <div>
     <div class="title">
+        <div>
         <h1> {{ Welcome }} </h1>
         <p><i>Welcome back!</i></p>
+        </div>
+        
     </div>
     <div>
         <form id="login-form" v-on:submit.prevent='tryLogin'>
@@ -41,14 +44,19 @@
         </form>
 
         <!-- Nav. Links -->
-        <div id="options">
-            <ul id="ul-links">            
-                <li><router-link to="/about">{{ About }}</router-link></li>
-                <li><router-link to="/about">{{ Mines }}</router-link></li>
-                <li><router-link to='/forgot'>{{ Forgot }}</router-link></li>
-                <li><router-link to="/">{{ Home }}</router-link></li>
-            </ul>
-        </div> 
+        <div class='x1'>
+            <div><img id='logo' src='../../../assets/saga.png'></div>
+            <div>
+                <div id="options">
+                    <ul id="ul-links">            
+                        <li><router-link to="/about">{{ About }}</router-link></li>
+                        <li><router-link to="/about">{{ Mines }}</router-link></li>
+                        <li><router-link to='/forgot'>{{ Forgot }}</router-link></li>
+                        <li><router-link to="/">{{ Home }}</router-link></li>
+                    </ul>
+                </div> 
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -125,8 +133,9 @@ export default Vue.extend({
 /* Title, Logo, Welcome */
 .title {
     margin: 0 auto;
-    width: 600px;
-    font-display: italic;
+    /* width: 600px; */
+    display:inline-flex
+    /* font-display: italic; */
 }
 
 /* Login form */
@@ -161,8 +170,9 @@ input[type=text], input[type=password] {
     border-radius: 12px;
 }
 #login:hover {
-    opacity: 0.8;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    opacity: 0.9;
+    background: linear-gradient(Green, salmon);
+    text-emphasis-color: black;
 }
 .container {
     padding: 40px;
@@ -173,11 +183,13 @@ input[type=text], input[type=password] {
 
 /* Relevant Links Div */
 #options {
-    border: 5px groove #04AA6D;
-    margin: 15px auto;
+    border: 3px groove #04AA6D;
+    margin: 40px 10px 10px 10px;
     width: 300px;
     text-align: center;
     background-color: bisque;  
+    display:inline-flex;
+    /* padding: 5px; */
 }
 
 /* Relevant Links List */
@@ -205,5 +217,14 @@ li a:hover {
     background-color: #111;
     color: white;
 }
+.x1 {
+    display: inline-flex;
+    padding: 5px;
+    margin: 5px;
+}
+#logo {
+    border:#04AA6D 3px groove;
+}
+
 
 </style>
