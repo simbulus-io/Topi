@@ -17,7 +17,7 @@
                             style='margin:0px 0px 0px 5px; padding:5px'></p>
                     <p><label style='font-size:20px;'><b>Information:</b></label>
                     <input placeholder="..." 
-                            v-model='meetInfo' 
+                            v-model='random' 
                             required
                             style='margin:0px 0px 0px 5px; padding:5px'></p>
                     <!-- Button -->
