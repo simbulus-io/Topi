@@ -1,6 +1,5 @@
 <template>
     <div>
-      
       <div class="mainDiv">
         <h1 class='title'>Forgot Password</h1>
         <p>So you forgot your password huh...?</p>

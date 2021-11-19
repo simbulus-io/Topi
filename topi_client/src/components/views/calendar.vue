@@ -10,17 +10,22 @@
             <h1 style='padding:10px; margin:0px 0px;'>Create Meeting</h1>
                 <p><i>Enter information about the meeting you would like to create...</i></p>
                 <div class='inputTitle'>
+
+                    <!-- User input - Meeting ID -->
                     <p><label style='font-size:20px;'><b>Meeting-ID:    </b></label>
                     <input placeholder="..." 
                             v-model='meetInfo' 
                             required
                             style='margin:0px 0px 0px 5px; padding:5px'></p>
+                    
+                    <!-- User input - anything else? -->
                     <p><label style='font-size:20px;'><b>Information:</b></label>
                     <input placeholder="..." 
                             v-model='random' 
                             required
                             style='margin:0px 0px 0px 5px; padding:5px'></p>
-                    <!-- Button -->
+
+                    <!-- Buttons -->
                     <div class='createMeetButton'>
                         <button 
                             @click='showModal = false' 
@@ -33,6 +38,7 @@
                             @click='showModal = false' >
                             Close</button></div>
                 </div>
+                
                 <!-- Dropdown (Created temp arr. 'userList')-->
                 <div class="dropdown">
                     <div>Add a student?</div>

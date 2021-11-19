@@ -1,11 +1,15 @@
 <template>
 <div>
+
+    <!-- Title -->
     <div class="title">
         <h1> {{ Welcome }} </h1>
         <p><i>Welcome to Topi!</i></p>
     </div>
 
     <div style="border: 0">
+
+        <!-- Form to create new user -->
         <form id="login-form" v-on:submit.prevent='registerUser'>
             <div class="container">
 
@@ -62,6 +66,9 @@
 import Alert from 'vue-simple-alert'
 import Router from '../../../router'
 export default {
+
+    // Data returns strings to make the above code more
+    // readable & holds other vars. for registration
     data ()  {
         return {
             Welcome: 'Topi Registration Page',
@@ -78,6 +85,10 @@ export default {
     },
 
     methods: {
+
+        // send inputted user information to DB then return, display an
+        // alert & route to the login page
+        // Note: Are we going to ensure no two users have same email?
         registerUser(this: any) {
             return fetch('/topi/register', {
                 method: 'POST',
@@ -95,6 +106,7 @@ export default {
             .catch(err => err.message)
         },
 
+        // Sends alert and routes
         sendAlert() {
             Alert.confirm("Registration Success!\n You are being redirected to the login page.").then(() => {
                 Router.push('/login')

@@ -1,5 +1,6 @@
 <template>
 <div>
+    <!-- Header -->
     <div class="title">
         <div>
         <h1> {{ Welcome }} </h1>
@@ -8,6 +9,8 @@
         
     </div>
     <div>
+
+        <!-- Form -->
         <form id="login-form" v-on:submit.prevent='tryLogin'>
             <div class="container">
 
@@ -69,6 +72,9 @@ import Store from '../../../store/store';
 import Vue from 'vue';
 
 export default Vue.extend({
+
+    // Data returns strings to make the above code more
+    // readable & holds other vars. for authentication
     data () {   
         return {
             Welcome: 'Topi Login Page',
@@ -83,8 +89,12 @@ export default Vue.extend({
         }
     },
 
-
     methods: {
+
+        // fetch URL through proxy server to validate credentials
+        // method has to be 'POST' in this case to send info. to
+        // the backend. Then validate resposne (check status)
+        // store the email (vuex) and route to calendar page.
         async tryLogin(this: any) {
             try {
             const res = await fetch('/topi/login', {
@@ -99,7 +109,8 @@ export default Vue.extend({
             .then(res => {
                 this.validate(res)
                 this.$store.state.user.email = this.email
-            }).then(none => {
+            })
+            .then(none => {
                 this.email = '',
                 this.password = ''
             })
@@ -108,6 +119,11 @@ export default Vue.extend({
                 return err.message
             }
         },
+
+        // Used to authenticate inputted credentials, checking
+        // status of promise response, then displaying alert
+        // if valid inputs -> send to calendar page
+        // else retry
         async validate(check: any) {
             try {
                 const rt = (check.status == 200) ? true : false
@@ -133,9 +149,7 @@ export default Vue.extend({
 /* Title, Logo, Welcome */
 .title {
     margin: 0 auto;
-    /* width: 600px; */
     display:inline-flex
-    /* font-display: italic; */
 }
 
 /* Login form */
@@ -222,6 +236,8 @@ li a:hover {
     padding: 5px;
     margin: 5px;
 }
+
+/* Saga photo */
 #logo {
     border:#04AA6D 3px groove;
 }
