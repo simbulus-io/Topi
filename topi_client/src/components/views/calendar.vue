@@ -9,8 +9,16 @@
         <div class='modal'>
             <h1>Create Meeting</h1>
                 <div class='inputTitle'>
-                    <p><label><b>Information</b></label></p>
-                        <p><input placeholder="Meeting name?" v-model='meetInfo' required></p>
+                    <p><label><b>Meeting name?</b></label>
+                    <input placeholder="Meeting name?" 
+                            v-model='meetInfo' 
+                            required
+                            style='margin:5px;'></p>
+                    <p><label><b>Information</b></label>
+                    <input placeholder="Meeting info?" 
+                            v-model='meetInfo' 
+                            required
+                            style='margin:10px;'></p>
                     <!-- Button -->
                     <div class='createMeetButton'>
                         <button 
@@ -20,19 +28,18 @@
                             Create Meeting</button></div>
                     <div class='closeButton'>
                         <button 
-                        @click='showModal = false' >
-                        Close</button></div>
+                            @click='showModal = false' >
+                            Close</button></div>
                 </div>
-
-            <!-- Dropdown (Created temp arr. 'userList')-->
-            <div class="dropdown">
-                <div>Add a student?</div>
-                <div class="dropContent" 
-                    v-for='user in userList' 
-                    v-bind:key='user'>
-                    <x>{{user}}</x>
+                <!-- Dropdown (Created temp arr. 'userList')-->
+                <div class="dropdown">
+                    <div>Add a student?</div>
+                    <div class="dropContent" 
+                        v-for='user in userList' 
+                        v-bind:key='user'>
+                        <x>{{user}}</x>
+                    </div>
                 </div>
-            </div>
         </div>
     </newMeetingBox>
 
