@@ -9,28 +9,28 @@
         <div class='modal'>
             <h1>Create Meeting</h1>
                 <div class='inputTitle'>
-                <p><label><b>Information</b></label></p>
-                    <p><input placeholder="Meeting Title" v-model='meetInfo' required></p>
-                <!-- Button -->
-                <div class='createMeetButton'>
-                    <button 
-                        @click='showModal = false' 
-                        v-on:click='toMeeting'
-                        style='margin:10px;'>
-                        
-                        Create Meeting</button></div>
-                <div class='closeButton'>
-                    <button 
-                    @click='showModal = false' >
-                    Close</button></div>
-        </div>
-            <!-- Dropdown -->
+                    <p><label><b>Information</b></label></p>
+                        <p><input placeholder="Meeting name?" v-model='meetInfo' required></p>
+                    <!-- Button -->
+                    <div class='createMeetButton'>
+                        <button 
+                            @click='showModal = false' 
+                            v-on:click='toMeeting'
+                            style='margin:10px;'>
+                            Create Meeting</button></div>
+                    <div class='closeButton'>
+                        <button 
+                        @click='showModal = false' >
+                        Close</button></div>
+                </div>
+
+            <!-- Dropdown (Created temp arr. 'userList')-->
             <div class="dropdown">
                 <div>Add a student?</div>
                 <div class="dropContent" 
                     v-for='user in userList' 
                     v-bind:key='user'>
-                    <p>{{user}}</p>
+                    <x>{{user}}</x>
                 </div>
             </div>
         </div>
@@ -47,7 +47,6 @@
                             <p class="event"> {{event.info}} | {{event.date}} | 
                             <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
                             </p></b></p>
-                        <div><i>No new events...</i></div>
                     <p><button id="show-modal" @click='showModal = true'>New Meeting</button></p>
                 </div>
             </div>
@@ -147,18 +146,22 @@ export default Vue.extend({
     border: 3px #04AA6D solid;
     text-align: center;
     content: center;
+    background-color: aliceblue;
 }
 .dropContent {
     display: none;
-    font-size: 25px;
+    font-size: 15px;
     min-width: 70px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    margin:0px;
-    padding:0px;
+    padding:5px;
     background-color: #04AA6D;
 }
 .dropContent:hover {
     background-color: #04AA6D;
+}
+.dropContent:hover x:hover {
+    background-color: yellow;
+    cursor: pointer;
 }
 .dropdown:hover .dropContent {
     background-color: #04AA6D;
