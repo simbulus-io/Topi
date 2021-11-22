@@ -190,6 +190,7 @@ input[type=text], input[type=password] {
 }
 .container {
     padding: 40px;
+    min-height: 100%;
 }
 .remember {
     padding: 10px 50px;
@@ -239,7 +240,9 @@ li a:hover {
 
 /* Saga photo */
 #logo {
-    border:#04AA6D 3px groove;
+    height:auto;
+    width: 200px;
+    /* border:#04AA6D 3px groove; */
 }
 
 
