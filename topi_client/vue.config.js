@@ -49,6 +49,17 @@ module.exports = {
                 target: 'http://localhost:5104',
                 pathRewrite: { '/get-info': '/topi/v1.0/get-info'}
             },
+
+            '/topi/getuserevents': {
+                target: 'http://localhost:5104',
+                pathRewrite: { '/topi/getuserevents': '/topi/v1.0/getuserevents'}
+            },
+
+            '/topi/createuserevent': {
+                target: 'http://localhost:5104',
+                pathRewrite: { '/topi/createuserevent': '/topi/v1.0/createuserevent'}
+            },
+
         }
     }
 }

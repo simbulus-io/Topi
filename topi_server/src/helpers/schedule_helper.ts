@@ -1,5 +1,6 @@
 import { ObjectId } from 'bson';
 import { Request, Response, NextFunction } from 'express';
+import { toArray } from 'lodash';
 import { MongoDBs } from './mongo_helper';
 
 const getEvents = async (req: Request, res: Response) => {
@@ -24,13 +25,15 @@ const getUserEvents = async (req: Request, res: Response) => {
 
     // grab user id
     let { email } = req.body
-
+    console.log('email')
     // find user's events and return (TODO)
-    db.collection('events')
+    let toSend = []
+    db.collection('users')
     .findOne({ email })
     .then(user => {
-        // return res.json({user: user})
-        return res.json({ events: user.userEvents })
+        toSend = user.userEvents
+        console.log(toSend)
+        return toSend
     })
     .catch(error => {
         return res.json({error: error.message})
@@ -49,18 +52,36 @@ const createUserEvent = async (req: Request, res: Response) => {
     // take data from request
     let { email, date, info } = req.body
     console.log(email, date, info)
+
+    // create obj. to add 
     const update = {
         email: email,
         date: date,
         info: info,
     }
 
+    // update user events using the 'update' obj.
+    db.collection('users').updateOne(
+        { email: email },
+        { $push: { userEvents: { update }}}
+    )
+    
+
+    // db.collection('users').findOne({ email })
+    // .then(user => {
+    //     return res.json({ user: user })
+    // })
+    // .catch(error => {
+    //     return res.json({ error: error.message})
+    // })
+
+
     // TODO - insert new event/meeting into user's info.
-    db.collection('events')
-    .insertOne({ update })
-    .catch(error => {
-        return res.json({ error: error.message })
-    })
+    // db.collection('events')
+    // .insertOne({ update })
+    // .catch(error => {
+    //     return res.json({ error: error.message })
+    // })
 
 }
 

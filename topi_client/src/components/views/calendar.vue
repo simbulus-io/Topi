@@ -57,11 +57,17 @@
             <div class="cal">
                 <div class="cal-body">
                     <h1> Events </h1>
-                    <p class="info">
-                        <b class="media" v-for="event in events" v-bind:key="event._id">
-                            <p class="event"> {{event.info}} | {{event.date}} | 
-                            <button class="event-button" @click='deleteEvent(event._id)'> delete event </button>
-                            </p></b></p>
+                    <p class="info" v-if='hasEvents == true'>
+                        <b class="media" v-for="update in events" :key="update.email">
+                            <p class="event"> 
+                                {{ update }}
+                                <button class="event-button" 
+                                    @click='deleteEvent(event._id)'> 
+                                    delete event </button>
+                            </p>
+                        </b>
+                    </p>
+                    <p v-else>No Events</p>
                     <p><button id="show-modal" @click='showModal = true'>New Meeting</button></p>
                 </div>
             </div>
@@ -69,14 +75,15 @@
                 <div class="cal-body">
                     <h1>Add events</h1>
                     <p><label for="info"><b>Information</b></label></p>
-                    <p><input type="info" placeholder="Event Name" v-model="infoNew" required></p>
+                    <p><input type="info" placeholder="Event Name" v-model="infoToSend" required></p>
                     <p><label for="date"><b>Date</b></label></p>
-                    <p><input type="date" placeholder="Event Date" v-model="dateNew" required></p>
+                    <p><input type="date" placeholder="Event Date" v-model="dateToSend" required></p>
                     <button @click='createEvent'>Add Event</button>
                 </div>
             </div>
         </div>
     </div>
+    <button id="show-modal" @click='getEvents'>test</button>
 </div>
 </template>
 
@@ -90,46 +97,77 @@ export default Vue.extend({
     data () {
         return {
             showModal: false,
+            hasEvents: false,
             name: this.$store.state.user.email,
-            events: this.$store.state.user.events,
+            events: [],
             title: 'Topi Scheduling Page',
             welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
-            infoNew: '',
-            dateNew: Date,
+            infoToSend: '',
+            dateToSend: '',
             delID: '',
             meetInfo: '',
             userList: ['Laura', 'Adam', 'Dillon'],
         }
     },
+
+    mounted() {
+        this.getEvents();
+        this.printEvents();
+    },
+
     methods: {
+        async printEvents() {
+            console.log(this.events)
+        },
+
+        // TODO create new array of user names from the GET
+        // then use a v-for in the dropdown to iterate and 
+        // output all the user names
         async grabUserList() {
             await fetch('/topi/get-info')
             .then(res => this.userList)
             console.log(this.userList)
         },
 
-
+        // Creates new user meeting ID from the modal & 
+        // routes the user to the meeting 
         async toMeeting() {
             this.$store.state.meetingId = this.meetInfo
             Router.push(`/meeting`)
         },
+
         async getEvents(this: any): Promise<any> {
-            await fetch('/topi/get-events')
-            .then(res => res.json())
-            .then(userEvents => {
-                return userEvents
-            })
-            .catch(error => console.log(error.message))
+            console.log('test user events')
+            try {
+                await fetch('/topi/getuserevents', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        email: 'ken@mail.com'
+                    })
+                })
+                .then(res => {
+                    this.events = res
+                    this.hasEvents = true
+                })
+            } catch(e: any) {
+                const err = e as Error
+                return err.message
+            }
         },
-        async createEvent(this: any) {
+
+        async createEvent(this: any): Promise<any> {
+            console.log(this.$store.state.user.email)
             try {
                 await fetch('/topi/create-event', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                     body: JSON.stringify({
-                        date: this.dateNew,
-                        info: this.infoNew,
+                        email: this.$store.state.user.email,
+                        date: this.dateToSend,
+                        info: this.infoToSend
                     })
                 })
             } catch (e: any) {
