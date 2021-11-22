@@ -42,7 +42,7 @@ module.exports = {
 
             '/topi/get-events': {
                 target: 'http://localhost:5104',
-                pathRewrite: { '/get-events': '/topi/v1.0/get-events'}
+                pathRewrite: { '/topi/get-events': '/topi/v1.0/get-events'}
             },
 
             '/topi/get-info': {

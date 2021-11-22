@@ -137,19 +137,19 @@ export default Vue.extend({
         },
 
         async getEvents(this: any): Promise<any> {
-            console.log('test user events')
             try {
                 await fetch('/topi/getuserevents', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                     body: JSON.stringify({
-                        email: 'ken@mail.com'
+                        email: this.$store.state.user.email
                     })
                 })
                 .then(res => {
                     this.events = res
                     this.hasEvents = true
+                    console.log(this.events)
                 })
             } catch(e: any) {
                 const err = e as Error

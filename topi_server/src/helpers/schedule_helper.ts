@@ -26,6 +26,7 @@ const getUserEvents = async (req: Request, res: Response) => {
     // grab user id
     let { email } = req.body
     console.log('email')
+    
     // find user's events and return (TODO)
     let toSend = []
     db.collection('users')
