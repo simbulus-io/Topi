@@ -32,7 +32,7 @@ module.exports = {
 
             '/topi/delete-event': {
                 target: 'http://localhost:5104',
-                pathRewrite: { '/delete-event': 'topi/v1.0/delete-event' }
+                pathRewrite: { '/topi/delete-event': '/topi/v1.0/delete-event' }
             },
 
             '/topi/get-info': {

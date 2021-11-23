@@ -32,9 +32,10 @@ const getUserEvents = async (req: Request, res: Response) => {
     db.collection('users')
     .findOne({ email })
     .then(user => {
-        toSend = user.userEvents
-        console.log(toSend)
-        return toSend
+        return res.json({user: user.useEvents})
+        // toSend = user.userEvents
+        // console.log(toSend)
+        // return toSend
     })
     .catch(error => {
         return res.json({error: error.message})
@@ -95,10 +96,11 @@ const createEvent = async (req: Request, res: Response) => {
     console.log('test for createEvent()')
 
     // create new event
-    let { date, info } = req.body;
+    let { email, date, info } = req.body;
 
     // insert into mongo
     db.collection('events').insertOne({
+        email: email,
         date: date,
         info: info,
     }, function (
@@ -118,14 +120,10 @@ const deleteEvent = async (req: Request, res: Response) => {
     // connect to mongo
     const mongo: MongoDBs = req.app.get('mongo');
     const db = mongo.topi_db;
+    console.log('Delete()')
 
     // delete event corresponding to _id
-    let id = req.body.id
-    console.log(`TEST: ${id}`)
-    db.collection('events')
-    .deleteOne({
-        _id: id
-    })
+    db.collection('events').drop()
     .catch(error => {
         return { error: error.message }
     })

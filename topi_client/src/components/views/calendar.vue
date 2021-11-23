@@ -86,11 +86,11 @@
                 <div class="cal-body">
                     <h1> Events </h1>
                     <p class="info" v-if='hasEvents == true'>
-                        <b class="media" v-for="update in events" :key="update.email">
-                            <p class="event"> 
-                                {{ update }}
+                        <b class="media" v-for="event in allEvents" :key="event._id">
+                            <p class="event" v-if="event.email == name"> 
+                                {{ event.date }} | {{ event.info }}
                                 <button class="event-button" 
-                                    @click='deleteEvent(event._id)'> 
+                                    @click='deleteEvent'> 
                                     delete event </button>
                             </p>
                         </b>
@@ -124,7 +124,8 @@ export default Vue.extend({
             showModal: false,
             hasEvents: false,
             name: this.$store.state.user.email,
-            events: [],
+            allEvents: [],
+            userEvents: [],
             title: 'Topi Scheduling Page',
             welcomeMsg: 'Here you can see your upcoming events, as well as create/delete any events as you see fit.',
             infoToSend: '',
@@ -137,13 +138,29 @@ export default Vue.extend({
     },
 
     mounted() {
-        this.getEvents();
-        this.printEvents();
+        this.getTheEvents();
+        this.eventCheck();
+        this.filterEvents();
+        // this.getEvents();
+        // this.printEvents();
     },
 
     methods: {
+        async filterEvents() {
+            console.log(this.$store.state.user.email)
+            for(let i = 0; i < this.allEvents.length; i++) {
+                console.log(this.allEvents[i][1])
+                if (this.allEvents[i][1] === this.$store.state.user.email) {
+                    this.userEvents.push(this.allEvents[i]);
+                } else {
+                    console.log('No match')
+                }
+            }
+        },
+
         async printEvents() {
-            console.log(this.events)
+            console.log(this.allEvents)
+            console.log(this.allEvents.length)
         },
 
         // TODO create new array of user names from the GET
@@ -173,11 +190,43 @@ export default Vue.extend({
                     })
                 })
                 .then(res => {
-                    this.events = res
+                    this.allEvents = res
                     this.hasEvents = true
-                    console.log(this.events)
                 })
             } catch(e: any) {
+                const err = e as Error
+                return err.message
+            }
+        },
+
+        getTheEvents: function() {
+            console.log('testing')
+            return fetch('/topi/get-events', {
+                method: 'POST'
+            })
+            .then(res => res.json())
+            .then(result => this.allEvents = result)
+            .then(any => this.hasEvents = true)
+            .catch(err => console.log(err.message))
+        },
+
+        async eventCheck() {
+            if (this.userEvents.length !== 0) {
+                this.hasEvents = true;
+                console.log(this.hasEvents)
+            } else {
+                console.log('this error')
+            }
+        },
+
+        async testGet(this: any): Promise<any> {
+            console.log('test')
+            try {
+                await fetch('/topi/get-events').then((res) => {
+                    this.allEvents = res
+                    console.log(this.allEvents)
+                })
+            } catch (e:any) {
                 const err = e as Error
                 return err.message
             }
