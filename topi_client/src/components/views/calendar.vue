@@ -137,8 +137,6 @@ export default Vue.extend({
         this.getTheEvents();
         this.eventCheck();
         this.filterEvents();
-        // this.getEvents();
-        // this.printEvents();
     },
 
     methods: {
@@ -149,7 +147,7 @@ export default Vue.extend({
                 if (this.allEvents[i][1] === this.$store.state.user.email) {
                     this.userEvents.push(this.allEvents[i]);
                 } else {
-                    console.log('No match')
+                    console.log('[DEBUG] No match')
                 }
             }
         },
@@ -196,7 +194,6 @@ export default Vue.extend({
         },
 
         getTheEvents: function() {
-            console.log('testing')
             return fetch('/topi/get-events', {
                 method: 'POST'
             })
@@ -211,12 +208,11 @@ export default Vue.extend({
                 this.hasEvents = true;
                 console.log(this.hasEvents)
             } else {
-                console.log('this error')
+                console.log('[DEBUG] eventCheck()')
             }
         },
 
         async testGet(this: any): Promise<any> {
-            console.log('test')
             try {
                 await fetch('/topi/get-events').then((res) => {
                     this.allEvents = res
