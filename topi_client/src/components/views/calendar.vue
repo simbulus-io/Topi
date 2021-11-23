@@ -4,50 +4,77 @@
     <h2> Hello, {{ name }} </h2>
     <p><i> {{ welcomeMsg }} </i></p>
 
+
     <!-- Modal -->
     <newMeetingBox v-if='showModal == true' class='modal'>
         <div class='modal'>
             <h1 style='padding:10px; margin:0px 0px;'>Create Meeting</h1>
                 <p><i>Enter information about the meeting you would like to create...</i></p>
-                <div class='inputTitle'>
+                <div class='modal-container'>
 
                     <!-- User input - Meeting ID -->
-                    <p><label style='font-size:20px;'><b>Meeting-ID:    </b></label>
-                    <input placeholder="..." 
-                            v-model='meetInfo' 
-                            required
-                            style='margin:0px 0px 0px 5px; padding:5px'></p>
-                    
+                    <div class='modal-row'>
+                        <div class='modal-col-1'>
+                            <modal-label style='font-size:20px;'><b>Meeting-ID:    </b></modal-label>
+                        </div>
+                        <div class='modal-col-2'> 
+                        <input placeholder="..." 
+                                type='modal-text'
+                                v-model='meetInfo' 
+                                required
+                                style='margin:0px 0px 0px 5px; padding:5px'>
+                        </div>
+                    </div>
                     <!-- User input - anything else? -->
-                    <p><label style='font-size:20px;'><b>Information:</b></label>
-                    <input placeholder="..." 
-                            v-model='random' 
-                            required
-                            style='margin:0px 0px 0px 5px; padding:5px'></p>
+                    <div class='modal-row'>
+                        <div class='modal-col-1'>
+                            <modal-label style='font-size:20px;'><b>Information:</b></modal-label>
+                        </div>
+                        
+                        <div class='modal-col-2'>
+                            <input placeholder="..." 
+                                type='modal-text'
+                                v-model='random' 
+                                required
+                                style='margin:0px 0px 0px 5px; padding:5px'>
+                        </div>
+                    </div>
+                    <!-- Dropdown (Created temp arr. 'userList')-->
+                    <div class=modal-row>
+                        <div class='modal-col-1'>
+                            <div class="dropdown">
+                                <div>Add a student?</div>
+                                <div class="dropContent" 
+                                    v-for='user in userList' 
+                                    v-bind:key='user'>
+                                    <x>{{user}}</x>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-col-1'>
+                            <div class='createMeetButton'>
+                                <button 
+                                    class='modal-buttons'
+                                    @click='showModal = false' 
+                                    v-on:click='toMeeting'>
+                                    Create Meeting</button></div>
+                            
+                        </div>
+                        <div class='modal-col-1'>
+                            <div class='closeButton'>
+                                <button 
+                                    class='modal-buttons'
+                                    @click='showModal = false' >
+                                    Close</button></div>
+                        </div>
+                    </div>
 
                     <!-- Buttons -->
-                    <div class='createMeetButton'>
-                        <button 
-                            @click='showModal = false' 
-                            v-on:click='toMeeting'
-                            style='margin:5px;'>
-                            Create Meeting</button></div>
-                    <div class='closeButton'>
-                        <button 
-                            style='margin:5px;'
-                            @click='showModal = false' >
-                            Close</button></div>
+                   
+
                 </div>
                 
-                <!-- Dropdown (Created temp arr. 'userList')-->
-                <div class="dropdown">
-                    <div>Add a student?</div>
-                    <div class="dropContent" 
-                        v-for='user in userList' 
-                        v-bind:key='user'>
-                        <x>{{user}}</x>
-                    </div>
-                </div>
+
         </div>
     </newMeetingBox>
 
@@ -71,19 +98,16 @@
                     <p><button id="show-modal" @click='showModal = true'>New Meeting</button></p>
                 </div>
             </div>
-            <div class="cal">
-                <div class="cal-body">
+            <div class="cal-add-events">
                     <h1>Add events</h1>
                     <p><label for="info"><b>Information</b></label></p>
                     <p><input type="info" placeholder="Event Name" v-model="infoToSend" required></p>
                     <p><label for="date"><b>Date</b></label></p>
                     <p><input type="date" placeholder="Event Date" v-model="dateToSend" required></p>
                     <button @click='createEvent'>Add Event</button>
-                </div>
             </div>
         </div>
     </div>
-    <button id="show-modal" @click='getEvents'>test</button>
 </div>
 </template>
 
@@ -107,6 +131,7 @@ export default Vue.extend({
             delID: '',
             meetInfo: '',
             userList: ['Laura', 'Adam', 'Dillon'],
+            test: false,
         }
     },
 
@@ -192,13 +217,46 @@ export default Vue.extend({
 })
 </script>
 <style scoped>
+.modal-container {
+    border-radius: 5px;
+    background: #b1cbbb;
+    padding:12px;
+}
+.modal-col-1 {
+    float:left;
+    width: 25%;
+    margin-top: 6px;
+}
+.modal-col-2 {
+    float:left;
+    width: 75%;
+    margin-top: 6px;
+}
+input[type=modal-text] {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.modal-row {
+    padding: 10px;
+    align-content: center;
+}
+.modal-row:after{
+    content:"";
+    display:table;
+    clear:both;
+}
+.modal-label {
+    display:inline-block;
+}
+
 .dropdown {
-    display:block;
-    max-width: 100px;
-    margin: 0px 0px 0px 30px;
-    padding: 5px;
+    /* width: 300px; */
+    padding: 7px;
     border: 3px #04AA6D solid;
-    background-color: aliceblue;
+    background-color: #04AA6D;
+    color:white;
+    font-size: 16px;
 }
 .dropContent {
     display: none;
@@ -224,16 +282,26 @@ export default Vue.extend({
     text-align: left;
     display:inline-block;
 }
+.modal-buttons {
+    background:#04AA6D;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor:pointer;
+}
+.modal-buttons:hover {
+    color: lightsteelblue;
+}
 
 .modal {
     padding: 10px;
     border: 5px lightseagreen outset;
-    background: beige;
+    background: #b1cbbb;
     width: 600px;
     height: 400px;
     box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
-    display: inline-flex;
     flex-direction: column;
     position: fixed;
     top: 50%;
@@ -273,19 +341,25 @@ input[type=date]{
 .col {
     border: 100px;
     display: inline-flex;
+    width:100%;
+    float:right;
 }
 .cal {
     overflow:scroll;
-    width: 300px;
-    height: 400px;
-    border-radius: 20px;
-    margin: 10px;
+    overflow: hidden;
     padding: 20px;
-    background-color: blanchedalmond;
+    border: 5px #04AA6D;
+    background: beige;
+    border-style: groove;
+    width: 500px;
+    height: 500px;
+}
+.cal-add-events{
     border: 5px #04AA6D;
     border-style: groove;
-    /* display: inline-flex; */
-    /* white-space: normal; */
+    width: 300px;
+    height:400px;
+    background: beige;
 }
 /* Info in Section */
 .event {
