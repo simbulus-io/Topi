@@ -5,11 +5,10 @@ import { Module } from 'vuex';
 import { GetterTree, MutationTree } from 'vuex';
 
 Vue.use(Vuex);
-
 export const state: User = {
-  username: 'KennyUser',
-  email: 'mail.com',
-  uid: '100',
+  username: 'null-user',
+  email: 'nouser@mail.com',
+  uid: 'noUID',
   loggedIn: false,
   events: [],
 };

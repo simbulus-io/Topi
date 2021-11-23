@@ -52,6 +52,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Buttons -->
                         <div class='modal-col-1'>
                             <div class='createMeetButton'>
                                 <button 
@@ -69,13 +70,7 @@
                                     Close</button></div>
                         </div>
                     </div>
-
-                    <!-- Buttons -->
-                   
-
                 </div>
-                
-
         </div>
     </newMeetingBox>
 
@@ -88,10 +83,11 @@
                     <p class="info" v-if='hasEvents == true'>
                         <b class="media" v-for="event in allEvents" :key="event._id">
                             <p class="event" v-if="event.email == name"> 
-                                {{ event.date }} | {{ event.info }}
+                                <button @click='toMeeting'>&#9658;</button>
+                                | {{ event.date }} | {{ event.info }} |
                                 <button class="event-button" 
                                     @click='deleteEvent'> 
-                                    delete event </button>
+                                    Delete</button>
                             </p>
                         </b>
                     </p>
@@ -375,7 +371,7 @@ input[type=date]{
 /* Row, Sections in row */
 .event-button{
     padding: 5px;
-    border-radius: 0;
+    border-radius: 12px;
     border-style: outset;
     background-color:salmon ;
     color: black; 

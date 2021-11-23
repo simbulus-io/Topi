@@ -12,7 +12,7 @@ import { IndexRoutes } from './routes/index_routes';
 import { Mongo } from './config/mongo';
 import { MongoDBs, MongoHelper } from './helpers/mongo_helper';
 import { PP } from './helpers/logger_helper';
-
+import store from '../../topi_client/src/store/store'
 import { Request, Response, NextFunction } from 'express';
 
 export class Server {
@@ -60,6 +60,9 @@ export class Server {
         }
         next();
       })
+
+      // store ?
+      // this.app.use(store)
       
       // (SK needed?)
       this.app.use(cookieParser());
