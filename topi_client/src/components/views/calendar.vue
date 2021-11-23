@@ -4,11 +4,12 @@
     <h2> Hello, {{ name }} </h2>
     <p><i> {{ welcomeMsg }} </i></p>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Modal -->
     <newMeetingBox v-if='showModal == true' class='modal'>
-        <div class='modal'>
-            <h1 style='padding:10px; margin:0px 0px;'>Create Meeting</h1>
+        <div class='modal'> 
+            <h1 style='padding:10px; margin:0px 0px;'><i class="fa fa-fw fa-camera"></i>  Create Meeting</h1>
                 <p><i>Enter information about the meeting you would like to create...</i></p>
                 <div class='modal-container'>
 
@@ -294,10 +295,9 @@ input[type=modal-text] {
 .modal-buttons:hover {
     color: lightsteelblue;
 }
-
 .modal {
     padding: 10px;
-    border: 5px lightseagreen outset;
+    border: 5px green outset;
     background: #b1cbbb;
     width: 600px;
     height: 400px;
@@ -308,7 +308,6 @@ input[type=modal-text] {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 input[type=info] {
     width: 90%;
     padding: 20px 10px ;

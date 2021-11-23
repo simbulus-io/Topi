@@ -27,8 +27,6 @@ export default Vue.extend({
       return {
         roomName: this.$store.state.meetingId,
         noSSL: false,
-        // width: 355,
-        // height:700,
         parentNode: document.querySelector('meet'),
         userInfo: {
           email: '',
@@ -63,7 +61,6 @@ export default Vue.extend({
 <style scoped>
   .all {
     width: 100%;
-    /* height: 100%; */
     min-height:100%;
   }
   .meet {
