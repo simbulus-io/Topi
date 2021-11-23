@@ -1,103 +1,102 @@
 <template>
-  <figure class="half" style="display:flex">
-  <table>
-    <tr>
-      <img class='img' src="https://www.mines.edu/wp-content/uploads/assets/logo_eee_4c_r.png">
-
-      <div class='all'> 
-        <div class='meet'>
-          <vue-jitsi-meet
-            ref="jitsiRef"
-            domain="meet.jit.si"
-            :options="jitsiOptions"> 
-          </vue-jitsi-meet>
+  <div class="row">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="l-col">
+      <div class="cont">
+        <h1>Problem Statement</h1>
+        <h2>Field Session Project: Topi</h2>
+        <p><i class="fa fa-quote-left fa-2x fa-ull-left"></i> The Saga Cohort will be tasked with developing an audio/video conferencing solution based on the open source video conferencing SDK Jitsi.  Saga currently uses the conferring solution from Twilio which is expensive and detracts from our mission to make high-impact tutoring affordable for all.  The project will involve full stack software engineering against a cutting edge SDK.  The client work will be node in ES6+ compatible Typescript & Haxe and will include UI/UX support from Saga’s design team.  The server side will be deployed in the AWS cloud and require the team to learn enough about cloud provisioning and deployments to effect a self-hosted solution.  The team will report directly to the VP of engineering and will be supported by the Saga engineering team as necessary.</p>
+        <div>
+          <!-- <img class="arc" src="../assets/ARC.png"> -->
         </div>
       </div>
-      <div class='whiteboard'>
-        <div class='header'><div>WHITEBOARD LETS GO TOPI
-      </div></div>
-        
+      <div class="cont" style='text-align:center'>
+        <h1>About Saga Education</h1>
+        <h2>Field Session Project: Topi</h2>
+        <p><i class="fa fa-quote-left fa-2x fa-ull-left"></i> Saga Education is a national nonprofit that has served over 17,600 students with high-dose math tutoring during their regular school day. Fueling this work is a bold vision to combat educational inequity by working with school districts to unlock the power of personal relationships to nurture academic, social and emotional growth for young people. Our students and schools represent historically marginalized communities. Our mission is to provide them with rigorous, high impact tutorials that ensure they have the confidence and academic strength to achieve success in high school and beyond.For more information about Saga Education’s mission, please visit us at www.sagaeducation.org.</p>
       </div>
-      
-    </tr>
-  </table>
-</figure>
+      <div class='cont' style='text-align: center;'>
+          <img class="arc" src="../assets/ARC.png">
+      </div>
+    </div>
+    <div class="r-col">
+      <div class="cont">
+        <h2 style="color:#04AA6D">About Topi</h2>
+        <p>What we used...</p>
+        <ul class="topi-list">
+          <li>Modern ES6+ environments</li>
+          <li>AWS Cloud</li>
+          <li>Docker/DockerHub</li>
+          <li>WebRTC</li>
+          <li>Typed REST</li>
+          <li>Typescript and Vue</li>
+          <li>MongoDB</li>
+        </ul>
+      </div>
+      <div class="cont" style="text-align:center">
+        <h2 style="color:#04AA6D">Contact Saga</h2>
+        <p>339-203-4700</p>
+        <p>info@sagaeducation.org</p>
+        <p>sagaeducation.org</p>
+      </div>
+      <div class="cont">
+        <h2>Contact Topi</h2>
+        <p>Kenneth Fernandez: 555-0199</p>
+        <p>Kenneth Fernandez: 555-0199</p>
+        <p>Kenneth Fernandez: 555-0199</p>
+        <p>Kenneth Fernandez: 555-0199</p>
+
+
+      </div>
+    </div>
+  </div>
+ 
 </template>
 
-<script>
-import { JitsiMeet } from '@mycure/vue-jitsi-meet';
-
-
-export default {
-  components: {
-    VueJitsiMeet: JitsiMeet
-  },
-  computed: {
-    jitsiOptions () {
-      return {
-        roomName: 'Topi',
-        noSSL: false,
-        width:400,
-        height:700,
-        userInfo: {
-          email: 'user@email.com',
-          displayName: 'laura',
-          
-        },
-        configOverwrite: {
-          enableNoisyMicDetection: false,
-          
-        },
-        interfaceConfigOverwrite: {
-          SHOW_JITSI_WATERMARK: false,
-          SHOW_WATERMARK_FOR_GUESTS: false,
-          SHOW_CHROME_EXTENSION_BANNER: false,
-          TILE_VIEW_MAX_COLUMNS: 3
-        },
-        onload: this.onIFrameLoad
-      };
-    },
-  },
-  
-  methods: {
-    onIFrameLoad () {
-      this.$refs.jitsiRef.executeCommand('setTileView', true);
-      this.$refs.jitsiRef.executeCommand('displayName', 'Ken Fernandez (tutor)');
-    },
-    onParticipantJoined(e) {
-      console.log('Someone joined')
-    }
-  },
-};
-</script>
-
 <style scoped>
-  
-  .img {
-    margin: 0 auto;
-    width: 50%;
-    padding:0px 10px 30px
-  }
-  .meet {
-    /* position:fixed; */
-    border: 10px outset #04AA6D;
-    width: 400px;
-    height:700px;
-    float:right;
-    border: 10px outset #04AA6D;
-    border-radius: 20px;
+* {
+  box-sizing: border-box;
+}
+.row {
+  padding: 50px;
+  overflow:scroll;
+}
+.l-col {
+  /* text-align: left; */
+  float: left;
+  width: 60%;
+}
+.r-col {
+  text-align: left;
+  float: left;
+  width: 40%;
+  padding-left:20px;
+}
+.cont {
+  border: #2c3e50 5px outset;
+  background: #deeaee;
+  padding: 20px;
+  margin-top:20px;
+}
+.topi-list {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid grey;
+}
+.topi-list li {
+  padding: 8px 16px;
+  border-bottom: 1px solid grey;
+}
+h1 {
+  color: #04AA6D;
+}
 
-    /* position: absolute; */
-    /* left:1300px */
-    
-  }
-  .whiteboard {
-    border: 10px outset #04AA6D;
-    background-color:white;
-    border-radius: 20px;
-    float:right;
-    width: 700px;
-    height:700px;
-  }
+h2:after{
+  content:' ';
+  display:block;
+  border: 1px solid grey;
+  /* padding-bottom: 3px; */
+}
+
 
 </style>
