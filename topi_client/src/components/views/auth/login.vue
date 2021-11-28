@@ -84,7 +84,7 @@ export default Vue.extend({
             Home: 'Back Home?',
             email: '',
             password: '',
-
+            loginCheck: false,
             check: false
         }
     },
@@ -111,6 +111,8 @@ export default Vue.extend({
                 this.$store.state.user.email = this.email
             })
             .then(none => {
+                sessionStorage.setItem('email', this.email);
+                sessionStorage.setItem('loggedIn', 'true');
                 this.email = '',
                 this.password = ''
             })
@@ -130,6 +132,7 @@ export default Vue.extend({
                 if (rt) {
                     console.log("Status 200: (login)")
                     Alert.confirm("Login Success!").then(() => {
+                        this.loginCheck = true;
                         Router.push('/calendar')
                     })
                 } else {

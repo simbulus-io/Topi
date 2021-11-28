@@ -1,7 +1,7 @@
 <template>
 <div class = 'modal-backdrop'>
     <h1> {{ title }} </h1>
-    <h2> Hello, {{ name }} </h2>
+    <h2> Hello, {{ storedEmail }} </h2>
     <p><i> {{ welcomeMsg }} </i></p>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -82,7 +82,7 @@
                     <h1> Events </h1>
                     <p class="info" v-if='hasEvents == true'>
                         <b class="media" v-for="event in allEvents" :key="event._id">
-                            <p class="event" v-if="event.email == name"> 
+                            <p class="event" v-if="event.email == storedEmail"> 
                                 <button @click='toMeeting'>&#9658;</button>
                                 | {{ event.date }} | {{ event.info }} |
                                 <button class="event-button" 
@@ -119,6 +119,7 @@ export default Vue.extend({
         return {
             showModal: false,
             hasEvents: false,
+            storedEmail: sessionStorage.getItem('email'),
             name: this.$store.state.user.email,
             allEvents: [],
             userEvents: [],
@@ -141,10 +142,9 @@ export default Vue.extend({
 
     methods: {
         async filterEvents() {
-            console.log(this.$store.state.user.email)
             for(let i = 0; i < this.allEvents.length; i++) {
                 console.log(this.allEvents[i][1])
-                if (this.allEvents[i][1] === this.$store.state.user.email) {
+                if (this.allEvents[i][1] === this.storedEmail) {
                     this.userEvents.push(this.allEvents[i]);
                 } else {
                     console.log('[DEBUG] No match')

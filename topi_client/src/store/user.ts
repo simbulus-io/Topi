@@ -27,6 +27,7 @@ export const getters: GetterTree<User, RootState> = {
 
 export const mutations: MutationTree<User> = {
   setUsername (state, payload: string) {
+    localStorage.setItem('name', state.username);
     state.username = payload;
   },
   setUserEmail (state, payload: string) {
