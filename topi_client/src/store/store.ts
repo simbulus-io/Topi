@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { StoreOptions } from 'vuex';
-import { RootState } from '@/store/types';
+import { RootState } from './types';
 import { user } from './user';
 
 Vue.use(Vuex);
